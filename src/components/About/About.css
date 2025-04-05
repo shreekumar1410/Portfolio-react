@@ -1,0 +1,86 @@
+@import '../../assets/styles/variables.css';
+
+.about-section {
+  background-color: var(--white);
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.about-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.about-info p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.info-item span {
+  font-weight: 600;
+  margin-right: 0.5rem;
+  color: var(--secondary-color);
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-wrapper {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .about-content {
+    flex-direction: column;
+  }
+  
+  .about-text {
+    order: 2;
+  }
+  
+  .about-image {
+    order: 1;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .about-info {
+    grid-template-columns: 1fr;
+  }
+}

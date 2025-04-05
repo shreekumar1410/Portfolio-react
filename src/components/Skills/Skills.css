@@ -1,0 +1,45 @@
+@import '../../assets/styles/variables.css';
+
+.skills-section {
+  background-color: var(--background-light);
+}
+
+.skills-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.skill-item {
+  margin-bottom: 2rem;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.skill-info h3 {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+}
+
+.skill-bar {
+  height: 10px;
+  background-color: var(--gray);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  transition: width 1s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    padding: 0 1rem;
+  }
+}
