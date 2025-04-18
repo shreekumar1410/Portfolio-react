@@ -1,5 +1,6 @@
 import React from 'react';
 import './About.css';
+import logo from '../../assets/images/Shree Kumar Photo.png'
 
 const About = () => {
   return (
@@ -21,26 +22,26 @@ const About = () => {
             <div className="about-info"> 
               <div className="info-item">
                 <span>Name:</span>
-                <p>Shree Kumar</p>
+                <p>Shree Kumar MB</p>
               </div>
               <div className="info-item">
                 <span>Email:</span>
-                <p>shreekumar@example.com</p>
+                <p>shreekumarmb@gmail.com</p>
               </div>
               <div className="info-item">
                 <span>Experience:</span>
-                <p>2+ Years</p>
+                <p>Fresher</p>
               </div>
               <div className="info-item">
                 <span>From:</span>
-                <p>Bangalore, India</p>
+                <p>Chennai, India</p>
               </div>
             </div>
             <a href="#contact" className="btn">Contact Me</a>
           </div>
           <div className="about-image">
             <div className="image-wrapper">
-              <img src=".././Shree Kumar Photo.JPG" alt="Shree Kumar" />
+              <img src={logo} alt="Shree Kumar" />
             </div>
           </div>
         </div>
