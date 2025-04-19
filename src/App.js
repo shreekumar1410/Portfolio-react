@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Nav from './components/NavBar/Nav';
+import SidebarNav from './components/SidebarNav/SidebarNav';
 import About from './components/About/About';
 import Skills from './components/Skills/Skills';
 import Projects from './components/Projects/Projects';
@@ -31,7 +31,7 @@ function App() {
   };
   return (
     <div className={`App ${darkMode ? 'dark' : ''}`}>
-      <Nav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <SidebarNav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <main>
         <About />
         <Skills />

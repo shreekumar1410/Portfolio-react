@@ -1,30 +1,42 @@
 /* ==================== */
 /* CSS Variables Setup  */
 /* ==================== */
-
 :root {
-  /* Base Colors */
+  /* ================ */
+  /* Core Variables   */
+  /* ================ */
+  --sidebar-width: 250px;
+  --sidebar-closed-width: 80px;
+  --mobile-nav-height: 60px;
+  --header-height: 4rem;
+  
+  /* ================ */
+  /* Color System     */
+  /* ================ */
+  /* Primary Colors */
   --primary-color: #3498db;
   --primary-dark: #2980b9;
   --primary-light: #5dade2;
   --primary-transparent: rgba(52, 152, 219, 0.1);
-
+  
+  /* Secondary Colors */
   --secondary-color: #2c3e50;
   --secondary-dark: #1a252f;
   --secondary-light: #34495e;
   --secondary-transparent: rgba(44, 62, 80, 0.1);
-
+  
+  /* Accent Colors */
   --accent-color: #e74c3c;
   --accent-dark: #c0392b;
   --accent-light: #ec7063;
-
+  
   /* Status Colors */
   --success: #2ecc71;
   --success-dark: #27ae60;
   --danger: #e74c3c;
   --warning: #f39c12;
   --info: #3498db;
-
+  
   /* Neutral Colors */
   --white: #ffffff;
   --black: #000000;
@@ -38,27 +50,31 @@
   --gray-800: #343a40;
   --gray-900: #212529;
 
-  /* Light Theme */
+  /* ================ */
+  /* Light Theme      */
+  /* ================ */
   --background: var(--white);
   --background-alt: var(--gray-100);
   --background-dark: var(--secondary-color);
-
+  
   --text-color: var(--gray-900);
   --text-light: var(--gray-600);
   --text-on-primary: var(--white);
   --text-on-dark: var(--white);
-
+  
   --card-bg: var(--white);
   --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
+  
   --border-color: var(--gray-300);
   --input-bg: var(--white);
   --input-border: var(--gray-400);
-
+  
   --hover-overlay: rgba(0, 0, 0, 0.05);
   --focus-ring: 0 0 0 3px rgba(52, 152, 219, 0.3);
 
-  /* Effects */
+  /* ================ */
+  /* Effects          */
+  /* ================ */
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
@@ -66,7 +82,9 @@
   --border-radius: 0.5rem;
   --border-radius-sm: 0.25rem;
 
-  /* Spacing */
+  /* ================ */
+  /* Spacing          */
+  /* ================ */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -74,50 +92,63 @@
   --space-xl: 2rem;
   --space-xxl: 3rem;
 
-  /* Components */
+  /* ================ */
+  /* Components       */
+  /* ================ */
+  /* Sidebar/Navbar */
+  --sidebar-bg: var(--secondary-color);
+  --sidebar-text: var(--text-on-dark);
+  --sidebar-icon-size: 1.2rem;
+  
+  /* Header */
   --header-bg: var(--secondary-color);
   --header-text: var(--text-on-dark);
-  --header-height: 4rem;
-
+  
+  /* Footer */
   --footer-bg: var(--secondary-color);
   --footer-text: var(--text-on-dark);
-
+  
+  /* Buttons */
   --btn-primary-bg: var(--primary-color);
   --btn-primary-hover: var(--primary-dark);
   --btn-secondary-bg: var(--secondary-light);
   --btn-secondary-hover: var(--secondary-color);
-
+  
+  /* Links */
   --link-color: var(--primary-color);
   --link-hover: var(--primary-dark);
-
+  
+  /* Code Blocks */
   --code-bg: var(--gray-100);
   --code-text: var(--danger);
 }
 
+/* ==================== */
 /* Dark Theme Overrides */
+/* ==================== */
 .dark {
   --background: #121212;
   --background-alt: #1e1e1e;
   --background-dark: #1a1a1a;
-
+  
   --text-color: rgba(255, 255, 255, 0.87);
   --text-light: rgba(255, 255, 255, 0.6);
-  --text-on-primary: var(--white);
-  --text-on-dark: var(--white);
-
+  
   --card-bg: #1e1e1e;
   --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-
+  
   --border-color: #333333;
   --input-bg: #2d2d2d;
   --input-border: #444444;
-
+  
   --hover-overlay: rgba(255, 255, 255, 0.05);
   --focus-ring: 0 0 0 3px rgba(52, 152, 219, 0.5);
 
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 
+  /* Component Overrides */
+  --sidebar-bg: #1a1a1a;
   --header-bg: #1a1a1a;
   --footer-bg: #1a1a1a;
   --code-bg: #2d2d2d;
@@ -137,4 +168,11 @@
 
 .border-primary {
   border-color: var(--primary-color);
+}
+
+/* Sidebar-specific utilities */
+.sidebar-icon {
+  font-size: var(--sidebar-icon-size);
+  min-width: calc(var(--sidebar-icon-size) + 10px);
+  transition: var(--transition);
 }
