@@ -6,8 +6,14 @@
   left: 0;
   width: 100%;
   padding: 1.5rem 0;
-  background-color: var(--white);
   z-index: 1000;
+}
+
+.header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  height: var(--header-height);
+  box-shadow: var(--box-shadow);
   transition: var(--transition);
 }
 
@@ -73,7 +79,7 @@
 .nav ul li a:hover::after {
   width: 100%;
 }
-
+/* 
 .menu-toggle {
   display: none;
   background: none;
@@ -90,10 +96,99 @@
   background-color: var(--secondary-color);
   margin: 5px 0;
   transition: var(--transition);
-}
+} */
 
 .header.scrolled .menu-toggle span {
   background-color: var(--secondary-color);
+}
+
+/* Add these to your existing Header.css */
+
+/* Focus styles */
+.focus-visible:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 4px;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* Mobile menu accessibility improvements */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.menu-toggle span {
+  width: 30px;
+  height: 3px;
+  background: currentColor;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle span:nth-child(1) {
+  transform: translateY(0) rotate(0);
+}
+
+.menu-toggle span:nth-child(2) {
+  opacity: 1;
+}
+
+.menu-toggle span:nth-child(3) {
+  transform: translateY(0) rotate(0);
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.nav {
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--background-dark);
+    padding-top: 5rem;
+  }
+  
+  .nav.open {
+    right: 0;
+  }
 }
 
 /* Mobile Navigation */

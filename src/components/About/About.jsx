@@ -1,6 +1,8 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import MyPhoto from '../../assets/images/My_New_Photo.png';
 import './About.css';
-import logo from '../../assets/images/Shree Kumar Photo.png'
 
 const About = () => {
   return (
@@ -19,7 +21,7 @@ const About = () => {
               programming languages and frameworks, I strive to build applications that make
               a difference.
             </p>
-            <div className="about-info"> 
+            <div className="about-info">
               <div className="info-item">
                 <span>Name:</span>
                 <p>Shree Kumar MB</p>
@@ -41,7 +43,14 @@ const About = () => {
           </div>
           <div className="about-image">
             <div className="image-wrapper">
-              <img src={logo} alt="Shree Kumar" />
+              <LazyLoadImage
+                src={MyPhoto}
+                alt="Shree Kumar"
+                effect="blur"
+                width="100%"
+                height="auto"
+                className="profile-photo"
+              />
             </div>
           </div>
         </div>
