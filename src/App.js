@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SidebarNav from './components/SidebarNav/SidebarNav';
-import About from './components/About/About';
-import Skills from './components/Skills/Skills';
-import Projects from './components/Projects/Projects';
-import Contact from './components/Contact/Contact';
-import Footer from './components/Footer/Footer';
 import './assets/styles/App.css';
 
 function App() {
@@ -15,16 +10,27 @@ function App() {
        localStorage.getItem('darkMode') !== 'false');
   });
 
-  useEffect(() => {
-    // Apply dark mode class to document
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
-    }
-  }, [darkMode]);
+  // useEffect(() => {
+  //   // Apply dark mode class to document
+  //   if (darkMode) {
+  //     document.documentElement.classList.add('dark');
+  //     localStorage.setItem('darkMode', 'true');
+  //   } else {
+  //     document.documentElement.classList.remove('dark');
+  //     localStorage.setItem('darkMode', 'false');
+  //   }
+  // }, [darkMode]);
+
+  // Add this useEffect to your App component
+useEffect(() => {
+  if (darkMode) {
+    document.documentElement.classList.add('dark');
+    document.body.style.backgroundColor = 'var(--background)';
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.body.style.backgroundColor = 'var(--background)';
+  }
+}, [darkMode]);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -32,13 +38,6 @@ function App() {
   return (
     <div className={`App ${darkMode ? 'dark' : ''}`}>
       <SidebarNav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <main>
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
     </div>
   );
 }

@@ -13,7 +13,14 @@ import {
   faMoon,
   faSun
 } from '@fortawesome/free-solid-svg-icons';
+import { Tooltip } from 'react-tooltip';
 import './SidebarNav.css';
+
+import About from '../About/About';
+import Skills from '../Skills/Skills';
+import Projects from '../Projects/Projects';
+import Contact from '../Contact/Contact';
+import Footer from '../Footer/Footer';
 
 const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -63,6 +70,9 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                     href={item.href} 
                     className="nav-link"
                     onClick={closeMobileMenu}
+                    data-tooltip-id="sidebar-tooltip"
+                    data-tooltip-content={item.name}
+                    data-tooltip-place="right"
                   >
                     <FontAwesomeIcon icon={item.icon} className="nav-icon" />
                     {isOpen && <span className="nav-text">{item.name}</span>}
@@ -83,6 +93,15 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
               </span>}
             </button>
           </div>
+          
+          {/* Tooltip for closed sidebar */}
+          {!isOpen && (
+            <Tooltip
+              id="sidebar-tooltip"
+              className="sidebar-tooltip"
+              variant={darkMode ? 'dark' : 'light'}
+            />
+          )}
         </aside>
       )}
 
@@ -126,6 +145,14 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
           )}
         </header>
       )}
+
+      <main className="main-content">
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+      </main>
     </>
   );
 };

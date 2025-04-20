@@ -1,7 +1,8 @@
 @import '../../assets/styles/variables.css';
 
 .about-section {
-  background-color: var(--white);
+  background-color: var(--background);
+  color: var(--text-color);
 }
 
 .about-content {
@@ -41,7 +42,7 @@
 .info-item span {
   font-weight: 600;
   margin-right: 0.5rem;
-  color: var(--secondary-color);
+  color: var(--text-light);
 }
 
 .about-image {
