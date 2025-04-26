@@ -15,7 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'react-tooltip';
 import './SidebarNav.css';
-
+import Home from '../Home/Home';
 import About from '../About/About';
 import Skills from '../Skills/Skills';
 import Projects from '../Projects/Projects';
@@ -147,6 +147,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
       )}
 
       <main className="main-content">
+        <Home />
         <About />
         <Skills />
         <Projects />
