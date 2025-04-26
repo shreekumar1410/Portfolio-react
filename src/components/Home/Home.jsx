@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
+import profileImage from '../../assets/images/My_New_Photo.png';
 
 const Home = () => {
   const [text, setText] = useState('');
@@ -7,13 +8,12 @@ const Home = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const words = ['Web Developer', 'Frontend Developer', 'Software Developer'];
+  const words = ['Web', 'Frontend', 'Full Stack'];
 
   useEffect(() => {
     const handleTyping = () => {
       const current = loopNum % words.length;
-      const fullText = words[current];
+      const fullText = words[current] + ' Developer';
 
       setText(
         isDeleting
@@ -21,7 +21,7 @@ const Home = () => {
           : fullText.substring(0, text.length + 1)
       );
 
-      setTypingSpeed(isDeleting ? 50 : 200);
+      setTypingSpeed(isDeleting ? 30 : 150);
 
       if (!isDeleting && text === fullText) {
         setTimeout(() => setIsDeleting(true), 1000);
@@ -40,7 +40,7 @@ const Home = () => {
     <section id="home" className="home-section">
       <div className="home-container">
         <div className="home-content">
-          <h1 className="home-greeting">Hello, I'm</h1>
+          <h2 className="home-greeting">Hello, I'm</h2>
           <h1 className="home-title">Shree Kumar</h1>
           <h2 className="home-subtitle">
             <span className="typed-text">{text}</span>
@@ -53,6 +53,13 @@ const Home = () => {
           <a href="#contact" className="home-button">
             Say Hello
           </a>
+        </div>
+        <div className="home-image">
+          <img 
+            src={profileImage} 
+            alt="Shree Kumar" 
+            className="profile-photo"
+          />
         </div>
       </div>
     </section>

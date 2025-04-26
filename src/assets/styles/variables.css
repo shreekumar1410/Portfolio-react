@@ -72,6 +72,8 @@
   --hover-overlay: rgba(0, 0, 0, 0.05);
   --focus-ring: 0 0 0 3px rgba(52, 152, 219, 0.3);
 
+  --text-shadow:rgba(0, 0, 0, 0.35);
+
   /* ================ */
   /* Effects          */
   /* ================ */
@@ -147,6 +149,8 @@
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 
+  --text-shadow:rgba(255, 255, 255, 0.35);
+
   /* Component Overrides */
   --sidebar-bg: #1a1a1a;
   --header-bg: #1a1a1a;
@@ -162,6 +166,18 @@
   --contact-input-bg: #2d2d2d;
   --contact-input-text: #ffffff;
   --contact-input-border: #444444;
+
+  /* .home-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  } */
+  
+  .home-button {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .profile-photo {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
 }
 
 /* ==================== */

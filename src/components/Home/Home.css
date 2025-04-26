@@ -1,72 +1,52 @@
 .home-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background-color: var(--background);
-    color: var(--text-color);
-    padding: 2rem;
-    transition: var(--transition);
-  }
-  
-  .home-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
-  
-  .home-content {
-    max-width: 600px;
-  }
-  
-  .home-title {
-    font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    text-shadow: -5px 5px 4px rgba(0, 0, 0, 0.35);
-    color: var(--primary-color);
-  }
-  
-  .home-subtitle {
-    font-size: 2rem;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-  }
-  
-  .home-description {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    color: var(--text-light);
-  }
-  
-  .home-button {
-    display: inline-block;
-    padding: 0.8rem 1.8rem;
-    background-color: var(--primary-color);
-    color: var(--text-on-primary);
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-    border: 2px solid var(--primary-color);
-  }
-  
-  .home-button:hover {
-    background-color: transparent;
-    color: var(--primary-color);
-  }
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--background);
+  color: var(--text-color);
+  padding: 2rem;
+  transition: var(--transition);
+}
 
-  .home-greeting {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    color: var(--text-light);
-  }
+.home-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
 
-  /* Typing animation styles */
+.home-content {
+  max-width: 600px;
+  flex: 1;
+}
+
+.home-greeting {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+}
+
+.home-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  text-shadow: -3px 8px 6px var(--text-shadow);
+  color: var(--primary-color);
+}
+
+.home-subtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  min-height: 2.5rem;
+}
+
 .typed-text {
   color: var(--primary-color);
 }
@@ -79,23 +59,92 @@
   animation: blink 1s infinite;
 }
 
+.home-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: var(--text-light);
+}
+
+.home-button {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background-color: var(--primary-color);
+  color: var(--text-on-primary);
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.home-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-photo {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--primary-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: var(--transition);
+}
+
+.profile-photo:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
 @keyframes blink {
   0% { opacity: 1; }
   50% { opacity: 0; }
   100% { opacity: 1; }
 }
 
-  
-  @media (max-width: 768px) {
-    .home-title {
-      font-size: 2.5rem;
-    }
-    
-    .home-subtitle {
-      font-size: 1.2rem;
-    }
-    
-    .home-description {
-      font-size: 1rem;
-    }
+@media (max-width: 992px) {
+  .home-container {
+    flex-direction: column;
+    text-align: center;
   }
+  
+  .home-image {
+    order: -1;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-photo {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2.5rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .home-description {
+    font-size: 1rem;
+  }
+  
+  .profile-photo {
+    width: 200px;
+    height: 200px;
+  }
+}
