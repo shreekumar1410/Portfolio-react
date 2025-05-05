@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 import profileImage from '../../assets/images/My_New_Photo.png';
+import cvFile from '../../assets/files/Shree_Kumar_CV.pdf'; // Make sure to add your CV file
 
 const Home = () => {
   const [text, setText] = useState('');
@@ -8,6 +9,7 @@ const Home = () => {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const words = ['Web', 'Frontend', 'Full Stack'];
 
   useEffect(() => {
@@ -50,8 +52,12 @@ const Home = () => {
             I'm a passionate developer based in Chennai, and I'm very dedicated
             to creating efficient, user-friendly web applications.
           </p>
-          <a href="#contact" className="home-button">
-            Say Hello
+          <a 
+            href={cvFile} 
+            download="Shree_Kumar_CV.pdf"
+            className="home-button"
+          >
+            Download CV
           </a>
         </div>
         <div className="home-image">
