@@ -8,8 +8,6 @@ import {
   faEnvelope,
   faBars,
   faTimes,
-  faChevronLeft,
-  faChevronRight,
   faMoon,
   faSun
 } from '@fortawesome/free-solid-svg-icons';
@@ -23,9 +21,10 @@ import Contact from '../Contact/Contact';
 import Footer from '../Footer/Footer';
 
 const SidebarNav = ({ darkMode, toggleDarkMode }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,20 +34,51 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
       }
     };
 
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
     handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initialize active section
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const navItems = [
-    { name: 'Home', icon: faHome, href: '#home' },
-    { name: 'About', icon: faUser, href: '#about' },
-    { name: 'Skills', icon: faCode, href: '#skills' },
-    { name: 'Projects', icon: faProjectDiagram, href: '#projects' },
-    { name: 'Contact', icon: faEnvelope, href: '#contact' }
+    { name: 'Home', icon: faHome, href: '#home', section: 'home' },
+    { name: 'About', icon: faUser, href: '#about', section: 'about' },
+    { name: 'Skills', icon: faCode, href: '#skills', section: 'skills' },
+    { name: 'Projects', icon: faProjectDiagram, href: '#projects', section: 'projects' },
+    { name: 'Contact', icon: faEnvelope, href: '#contact', section: 'contact' }
   ];
 
-  const toggleSidebar = () => setIsOpen(!isOpen);
+  const handleSidebarHover = (hoverState) => {
+    if (!isMobile) {
+      setIsOpen(hoverState);
+    }
+  };
+
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const closeMobileMenu = () => setMobileMenuOpen(false);
 
@@ -56,19 +86,18 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     <>
       {/* Desktop Sidebar */}
       {!isMobile && (
-        <aside className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
-          <div className="sidebar-header">
-            <button onClick={toggleSidebar} className="toggle-btn">
-              <FontAwesomeIcon icon={isOpen ? faChevronLeft : faChevronRight} />
-            </button>
-          </div>
+        <aside 
+          className={`sidebar ${isOpen ? 'open' : 'closed'}`}
+          onMouseEnter={() => handleSidebarHover(true)}
+          onMouseLeave={() => handleSidebarHover(false)}
+        >
           <nav className="sidebar-nav">
             <ul>
               {navItems.map((item) => (
                 <li key={item.name}>
                   <a 
                     href={item.href} 
-                    className="nav-link"
+                    className={`nav-link ${activeSection === item.section ? 'active' : ''}`}
                     onClick={closeMobileMenu}
                     data-tooltip-id="sidebar-tooltip"
                     data-tooltip-content={item.name}
@@ -132,7 +161,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                   <li key={item.name}>
                     <a 
                       href={item.href} 
-                      className="mobile-nav-link"
+                      className={`mobile-nav-link ${activeSection === item.section ? 'active' : ''}`}
                       onClick={closeMobileMenu}
                     >
                       <FontAwesomeIcon icon={item.icon} className="mobile-nav-icon" />
