@@ -1,6 +1,7 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { FaGithub, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 import MyPhoto from '../../assets/images/My_New_Photo.png';
 import './About.css';
 
@@ -12,14 +13,17 @@ const About = () => {
         <div className="about-content">
           <div className="about-text">
             <p>
-              Hi, I'm Shree Kumar, a passionate Full Stack Developer with expertise in building
-              web applications using modern technologies. I love solving complex problems and
-              creating efficient, scalable, and user-friendly solutions.
+              <strong>Hi, I'm Shree Kumar!</strong><br />
+              A creative and detail-oriented Frontend & Web Developer from Chennai, passionate about 
+              building interactive, user-friendly websites and applications. With a degree in 
+              Information Technology and expertise in HTML, CSS, JavaScript, Python, SQL, and React, 
+              I love turning ideas into functional and visually appealing digital experiences.
             </p>
             <p>
-              With a strong foundation in computer science and hands-on experience in various
-              programming languages and frameworks, I strive to build applications that make
-              a difference.
+              As a fresher, I bring fresh perspectives, a problem-solving mindset, and a hunger to 
+              learn and grow in the ever-evolving world of web development. Whether it's debugging 
+              code, optimizing performance, or crafting responsive designs, I thrive on challenges 
+              that push me to innovate.
             </p>
             <div className="about-info">
               <div className="info-item">
@@ -39,7 +43,6 @@ const About = () => {
                 <p>Chennai, India</p>
               </div>
             </div>
-            <a href="#contact" className="btn">Contact Me</a>
           </div>
           <div className="about-image">
             <div className="image-wrapper">
@@ -51,6 +54,44 @@ const About = () => {
                 height="auto"
                 className="profile-photo"
               />
+            </div>
+            <div className="social_links">
+              <a 
+                href="https://linkedin.com/in/yourprofile" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-icon"
+                data-tooltip="LinkedIn"
+              >
+                <FaLinkedin />
+              </a>
+              <a 
+                href="https://github.com/yourprofile" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-icon"
+                data-tooltip="GitHub"
+              >
+                <FaGithub />
+              </a>
+              <a 
+                href="https://twitter.com/yourprofile" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-icon"
+                data-tooltip="Twitter"
+              >
+                <FaTwitter />
+              </a>
+              <a 
+                href="https://youtube.com/yourchannel" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-icon"
+                data-tooltip="YouTube"
+              >
+                <FaYoutube />
+              </a>
             </div>
           </div>
         </div>

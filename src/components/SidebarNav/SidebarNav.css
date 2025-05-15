@@ -124,6 +124,10 @@
   margin: 0;
 }
 
+.sidebar-nav li {
+  margin: calc(var(--space-sm) + 0.5rem) 0;
+}
+
 .nav-link {
   display: flex;
   align-items: center;

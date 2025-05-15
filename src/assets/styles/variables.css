@@ -74,6 +74,11 @@
 
   --text-shadow:rgba(0, 0, 0, 0.35);
 
+  --social-icon-color: #333;
+  --social-icon-hover: #3498db;
+  --tooltip-bg: #333;
+  --tooltip-text: #fff;
+
   /* ================ */
   /* Effects          */
   /* ================ */
@@ -150,6 +155,11 @@
   --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 
   --text-shadow:rgba(255, 255, 255, 0.35);
+
+  --social-icon-color: #ddd;
+  --social-icon-hover: #1abc9c;
+  --tooltip-bg: #ddd;
+  --tooltip-text: #333;
 
   /* Component Overrides */
   --sidebar-bg: #1a1a1a;
