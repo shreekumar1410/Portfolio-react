@@ -1,5 +1,7 @@
 import React from 'react';
 import './Footer.css';
+import { FaGithub, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -24,11 +26,43 @@ const Footer = () => {
           <div className="footer-social">
             <h3>Connect With Me</h3>
             <div className="social-links">
-              <a href="#" aria-label="GitHub"><i className="fab fa-github"></i></a>
-              <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
-              <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
-              <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-            </div>
+                          <a 
+                            href="www.linkedin.com/in/shree-kumar-mb" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="social-icon"
+                            data-tooltip="LinkedIn"
+                          >
+                            <FaLinkedin />
+                          </a>
+                          <a 
+                            href="https://github.com/shreekumar1410" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="social-icon"
+                            data-tooltip="GitHub"
+                          >
+                            <FaGithub />
+                          </a>
+                          <a 
+                            href="https://x.com/ShreeKumar91905" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="social-icon"
+                            data-tooltip="Twitter"
+                          >
+                            <FaTwitter />
+                          </a>
+                          <a 
+                            href="https://www.youtube.com/@shreekumarmb9924" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="social-icon"
+                            data-tooltip="YouTube"
+                          >
+                            <FaYoutube />
+                          </a>
+                        </div>
           </div>
         </div>
         <div className="footer-bottom">

@@ -9,7 +9,9 @@ import {
   faBars,
   faTimes,
   faMoon,
-  faSun
+  faSun,
+  faGraduationCap, 
+  faBriefcase 
 } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'react-tooltip';
 import './SidebarNav.css';
@@ -19,6 +21,7 @@ import Skills from '../Skills/Skills';
 import Projects from '../Projects/Projects';
 import Contact from '../Contact/Contact';
 import Footer from '../Footer/Footer';
+import EducationExperience from '../EducationExperience/EducationExperience';
 
 const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,10 +71,11 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   const navItems = [
     { name: 'Home', icon: faHome, href: '#home', section: 'home' },
     { name: 'About', icon: faUser, href: '#about', section: 'about' },
+    { name: 'Education', icon: faGraduationCap, href: '#education', section: 'education' },
     { name: 'Skills', icon: faCode, href: '#skills', section: 'skills' },
     { name: 'Projects', icon: faProjectDiagram, href: '#projects', section: 'projects' },
     { name: 'Contact', icon: faEnvelope, href: '#contact', section: 'contact' }
-  ];
+];
 
   const handleSidebarHover = (hoverState) => {
     if (!isMobile) {
@@ -178,6 +182,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
       <main className="main-content">
         <Home />
         <About />
+        <EducationExperience />
         <Skills />
         <Projects />
         <Contact />

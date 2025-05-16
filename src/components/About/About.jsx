@@ -14,7 +14,7 @@ const About = () => {
           <div className="about-text">
             <p>
               <strong>Hi, I'm Shree Kumar!</strong><br />
-              A creative and detail-oriented Frontend & Web Developer from Chennai, passionate about 
+              A creative Frontend & Web Developer from Chennai, passionate about 
               building interactive, user-friendly websites and applications. With a degree in 
               Information Technology and expertise in HTML, CSS, JavaScript, Python, SQL, and React, 
               I love turning ideas into functional and visually appealing digital experiences.
@@ -57,7 +57,7 @@ const About = () => {
             </div>
             <div className="social_links">
               <a 
-                href="https://linkedin.com/in/yourprofile" 
+                href="www.linkedin.com/in/shree-kumar-mb" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -66,7 +66,7 @@ const About = () => {
                 <FaLinkedin />
               </a>
               <a 
-                href="https://github.com/yourprofile" 
+                href="https://github.com/shreekumar1410" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -75,7 +75,7 @@ const About = () => {
                 <FaGithub />
               </a>
               <a 
-                href="https://twitter.com/yourprofile" 
+                href="https://x.com/ShreeKumar91905" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -84,7 +84,7 @@ const About = () => {
                 <FaTwitter />
               </a>
               <a 
-                href="https://youtube.com/yourchannel" 
+                href="https://www.youtube.com/@shreekumarmb9924" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
