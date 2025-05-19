@@ -1,4 +1,16 @@
+.education-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--background);
+  color: var(--text-color);
+  padding: 2rem;
+  transition: var(--transition);
+}
+
+
 /* Tab Buttons */
+
 .tab-buttons {
   display: flex;
   justify-content: center;

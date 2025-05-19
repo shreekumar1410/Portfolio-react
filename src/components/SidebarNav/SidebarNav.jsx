@@ -38,17 +38,21 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     };
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
+      console.log(`Scroll position: ${scrollPosition}`);
 
       for (const section of sections) {
         const element = document.getElementById(section);
+        console.log(`Element ID: ${section}`);
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
+          console.log(`Section: ${section}, Offset Top: ${offsetTop}, Offset Height: ${offsetHeight}`);
 
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section);
+            // console.log(`Active section: ${section}`);
             break;
           }
         }

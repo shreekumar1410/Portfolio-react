@@ -57,7 +57,7 @@ const About = () => {
             </div>
             <div className="social_links">
               <a 
-                href="www.linkedin.com/in/shree-kumar-mb" 
+                href="https://www.linkedin.com/in/shree-kumar-mb/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
