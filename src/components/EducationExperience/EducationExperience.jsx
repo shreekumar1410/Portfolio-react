@@ -1,58 +1,74 @@
 import React, { useState } from 'react';
+import { FaGraduationCap, FaBriefcase, FaChevronRight } from 'react-icons/fa';
 import './EducationExperience.css';
-import { FaGraduationCap, FaBriefcase } from 'react-icons/fa';
 
 const EducationExperience = () => {
   const [activeTab, setActiveTab] = useState('education');
 
-  // Sample data - replace with your actual details
   const educationData = [
     {
       id: 1,
-      year: "2019 - 2023",
-      degree: "Bachelor of Technology in IT",
-      institution: "Your University",
-      description: "Specialized in Web Development and Data Structures."
+      icon: <FaGraduationCap className="edu-icon" />,
+      degree: "Bachelor of Technology in Information Technology",
+      institution: "Jaya Engineering College",
+      period: "2020 – 2024",
+      details: [
+        "CGPA: 7.9/10",
+        "Relevant coursework: Web Development, Front-End Frameworks",
+      ]
     },
     {
       id: 2,
-      year: "2017 - 2019",
-      degree: "Higher Secondary",
-      institution: "Your College",
-      description: "Computer Science Stream."
+      icon: <FaGraduationCap className="edu-icon" />,
+      degree: "Diploma in Mechanical Engineering",
+      institution: "Jaya Polytechnic College",
+      period: "2018 – 2021",
+      details: [
+        "Percentage: 85%",
+        "Participated in various technical workshops and seminars"
+      ]
+    },
+    {
+      id: 3,
+      icon: <FaGraduationCap className="edu-icon" />,
+      degree: "Bhaktavatsalam Vidhyashram (10th Grade)",
+      institution: "CBSE",
+      period: "2018",
+      details: [
+        "Scored 55% in final board exams"
+      ]
     }
   ];
 
   const experienceData = [
     {
       id: 1,
-      year: "2022 - Present",
-      role: "Frontend Developer",
-      company: "XYZ Tech",
-      description: "Building responsive UIs with React.js."
-    },
-    {
-      id: 2,
-      year: "2021 - 2022",
-      role: "Web Developer Intern",
-      company: "ABC Solutions",
-      description: "Developed and maintained company websites."
+      icon: <FaBriefcase className="exp-icon" />,
+      role: "Web Designer Intern",
+      company: "Anur Cloud Technologies",
+      period: "Jun 2023 – Jul 2023",
+      details: [
+        "Collaborated with designers and Designed user-friendly interfaces",
+        "Worked with Photoshop to create and edit images for web use",
+      ]
     }
   ];
 
   return (
-    <section id="education" className="education-section">
+    <section id="education-experience" className="section">
       <div className="container">
-        <h2 className="section-title">Journey</h2>
-        
-        <div className="tab-buttons">
-          <button 
+        <h2 className="section-title">
+          My Journey
+        </h2>
+
+        <div className="tab-switcher">
+          <button
             className={`tab-btn ${activeTab === 'education' ? 'active' : ''}`}
             onClick={() => setActiveTab('education')}
           >
             <FaGraduationCap /> Education
           </button>
-          <button 
+          <button
             className={`tab-btn ${activeTab === 'experience' ? 'active' : ''}`}
             onClick={() => setActiveTab('experience')}
           >
@@ -60,34 +76,31 @@ const EducationExperience = () => {
           </button>
         </div>
 
-        <div className="timeline-container">
-          {activeTab === 'education' ? (
-            <div className="timeline education-timeline">
-              {educationData.map((item) => (
-                <div key={item.id} className="timeline-item">
-                  <div className="timeline-content">
-                    <span className="timeline-year">{item.year}</span>
-                    <h3 className="timeline-title">{item.degree}</h3>
-                    <h4 className="timeline-subtitle">{item.institution}</h4>
-                    <p className="timeline-description">{item.description}</p>
-                  </div>
+        <div className="timeline">
+          {(activeTab === 'education' ? educationData : experienceData).map((item, index) => (
+            <div 
+              key={item.id} 
+              className={`timeline-item ${activeTab}`}
+              style={{ '--delay': index * 0.1 + 's' }}
+            >
+              <div className="timeline-icon">{item.icon}</div>
+              <div className="timeline-content">
+                <div className="timeline-header">
+                  <h3>{activeTab === 'education' ? item.degree : item.role}</h3>
+                  <span className="period">{item.period}</span>
                 </div>
-              ))}
+                <h4>{activeTab === 'education' ? item.institution : item.company}</h4>
+                <ul className="details-list">
+                  {item.details.map((detail, i) => (
+                    <li key={i}>
+                      {/* <FaChevronRight className="bullet-icon" /> */}
+                      {detail}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          ) : (
-            <div className="timeline experience-timeline">
-              {experienceData.map((item) => (
-                <div key={item.id} className="timeline-item">
-                  <div className="timeline-content">
-                    <span className="timeline-year">{item.year}</span>
-                    <h3 className="timeline-title">{item.role}</h3>
-                    <h4 className="timeline-subtitle">{item.company}</h4>
-                    <p className="timeline-description">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          ))}
         </div>
       </div>
     </section>

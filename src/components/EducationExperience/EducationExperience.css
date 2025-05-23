@@ -1,112 +1,177 @@
-.education-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  background-color: var(--background);
-  color: var(--text-color);
-  padding: 2rem;
-  transition: var(--transition);
+.section {
+  padding: 5rem 0;
+  background: var(--background);
 }
 
+.section-title {
+  position: relative; 
+  margin-bottom: 3rem;
+  font-size: 2.2rem;
+}
 
-/* Tab Buttons */
-
-.tab-buttons {
+.tab-switcher {
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
   gap: 1rem;
+  margin-bottom: 3rem;
 }
 
 .tab-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.8rem;
   border: none;
   background: var(--background-light);
   color: var(--text-color);
   border-radius: 50px;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
   font-weight: 600;
+  font-size: 1rem;
 }
 
 .tab-btn.active {
   background: var(--primary-color);
   color: white;
-}
-
-.tab-btn:hover {
-  transform: translateY(-3px);
-}
-
-/* Timeline Animation */
-.timeline-container {
-  overflow: hidden;
-  max-height: 600px;
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
 }
 
 .timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  animation: fadeInUp 0.5s ease-out;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 4rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 2.25rem;
+  top: 0;
+  height: 100%;
+  width: 2px;
 }
 
 .timeline-item {
   position: relative;
-  padding-left: 2rem;
-  border-left: 2px solid var(--primary-color);
-  animation: slideInRight 0.6s ease-out forwards;
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.6s ease-out var(--delay) forwards;
   opacity: 0;
 }
 
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.3s; }
-.timeline-item:nth-child(3) { animation-delay: 0.5s; }
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -4rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--background-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  box-shadow: var(--box-shadow);
+  z-index: 1;
+}
+
+.edu-icon {
+  color: #4e79a7;
+}
+
+.exp-icon {
+  color: #e15759;
+}
 
 .timeline-content {
   background: var(--background-light);
-  padding: 1.5rem;
-  border-radius: 8px;
+  padding: 2rem;
+  border-radius: 0.5rem;
   box-shadow: var(--box-shadow);
-  transition: var(--transition);
+  transition: transform 0.3s ease;
 }
 
 .timeline-content:hover {
   transform: translateY(-5px);
 }
 
-.timeline-year {
-  display: inline-block;
-  background: var(--primary-color);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 0.5rem;
 }
 
-/* Animations */
-@keyframes slideInRight {
-  from {
-    transform: translateX(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.timeline-header h3 {
+  margin: 0;
+  color: var(--primary-color);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+.period {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+}
+
+.details-list {
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+  /* list-style: none; */
+  /* padding-left: 0; */
+}
+
+.details-list li {
+  position: relative;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.bullet-icon {
+  position: absolute;
+  left: -1.5rem;
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  top: 0.4rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 3rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .timeline::before {
+    left: 1.75rem;
+  }
+  
+  .timeline-icon {
+    left: -3rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .period {
+    align-self: flex-start;
   }
 }
