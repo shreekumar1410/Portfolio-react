@@ -17,7 +17,7 @@ import { Tooltip } from 'react-tooltip';
 import './SidebarNav.css';
 import Home from '../Home/Home';
 import About from '../About/About';
-import Skills from '../Skills/Skills';
+import Technologies from '../Technologies/Technologies';
 import Projects from '../Projects/Projects';
 import Contact from '../Contact/Contact';
 import Footer from '../Footer/Footer';
@@ -38,7 +38,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     };
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'education', 'skills', 'projects', 'contact'];
+      const sections = ['home', 'about', 'education', 'technologies', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
       // console.log(`Scroll position: ${scrollPosition}`);
 
@@ -76,7 +76,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     { name: 'Home', icon: faHome, href: '#home', section: 'home' },
     { name: 'About', icon: faUser, href: '#about', section: 'about' },
     { name: 'Education', icon: faGraduationCap, href: '#education', section: 'education' },
-    { name: 'Skills', icon: faCode, href: '#skills', section: 'skills' },
+    { name: 'Technologies', icon: faCode, href: '#technologies', section: 'technologies' },
     { name: 'Projects', icon: faProjectDiagram, href: '#projects', section: 'projects' },
     { name: 'Contact', icon: faEnvelope, href: '#contact', section: 'contact' }
 ];
@@ -187,7 +187,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
         <Home />
         <About />
         <EducationExperience />
-        <Skills />
+        <Technologies />
         <Projects />
         <Contact />
         <Footer />
