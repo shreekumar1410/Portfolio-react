@@ -17,8 +17,8 @@ const Technologies = () => {
     { id: 4, name: 'React', icon: <FaReact />, category: 'frontend' },
     { id: 5, name: 'Python', icon: <FaPython />, category: 'backend' },
     { id: 6, name: 'C', icon: <SiC />, category: 'backend' },
-    { id: 7, name: 'SQL', icon: <SiMysql />, category: 'database' },
-    { id: 8, name: 'Flask', icon: <SiFlask />, category: 'backend' }
+    { id: 7, name: 'Flask', icon: <SiFlask />, category: 'backend' },
+    { id: 8, name: 'SQL', icon: <SiMysql />, category: 'database' }
   ];
 
   const filteredTechs = activeFilter === 'all' 
