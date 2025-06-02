@@ -8,13 +8,20 @@ const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Get all unique categories from projects
-  const categories = ['all', ...new Set(projectsData.map(project => project.category))];
+  // Get all unique categories (flatten multiple categories)
+  const categories = ['all', ...new Set(
+    projectsData.flatMap(project => 
+      project.category.split(',').map(cat => cat.trim())
+    )
+  )];
 
   const filteredProjects = projectsData.filter(project => {
     const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          project.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = filter === 'all' || project.category === filter;
+    
+    const projectCategories = project.category.split(',').map(cat => cat.trim());
+    const matchesFilter = filter === 'all' || projectCategories.includes(filter);
+    
     return matchesSearch && matchesFilter;
   });
 
