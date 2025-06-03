@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaPaperPlane, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 import './Contact.css';
 
 const Contact = () => {
@@ -7,94 +9,114 @@ const Contact = () => {
     email: '',
     message: ''
   });
-  const [status, setStatus] = useState('');
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus('sending');
-    
-    try {
-      const response = await fetch('https://formspree.io/f/your-form-id', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setStatus(''), 3000);
-      } else {
-        throw new Error('Form submission failed');
-      }
-    } catch (error) {
-      setStatus('error');
-      setTimeout(() => setStatus(''), 3000);
-    }
+    // Handle form submission
+    console.log(formData);
+    // Reset form
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
     <section id="contact" className="contact-section">
       <div className="container">
-        <h2 className="section-title">Contact Me</h2>
-        <form onSubmit={handleSubmit} className="contact-form">
-          <div className="form-group">
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="focus-visible"
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="focus-visible"
-            />
-          </div>
-          <div className="form-group">
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows="5"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              className="focus-visible"
-            ></textarea>
-          </div>
-          <button 
-            type="submit" 
-            className="btn"
-            disabled={status === 'sending'}
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          Get In Touch
+        </motion.h2>
+
+        <div className="contact-content">
+          {/* Contact Info */}
+          <motion.div 
+            className="contact-info"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
           >
-            {status === 'sending' ? 'Sending...' : 'Send Message'}
-          </button>
-          {status === 'success' && (
-            <p className="form-status success">Message sent successfully!</p>
-          )}
-          {status === 'error' && (
-            <p className="form-status error">Failed to send message. Please try again.</p>
-          )}
-        </form>
+            <h3>Contact Information</h3>
+            <p>Feel free to reach out to me for any questions or opportunities!</p>
+
+            <ul className="info-list">
+              <li>
+                <FaMapMarkerAlt className="info-icon" />
+                <span>Old Washermenpet, Chennai, India</span>
+              </li>
+              <li>
+                <FaPhone className="info-icon" />
+                <span>+91 7358314846</span>
+              </li>
+              <li>
+                <FaEnvelope className="info-icon" />
+                <span>shreekumarmb@gmail.com</span>
+              </li>
+            </ul>
+
+            <div className="social-links">
+              {/* Add your social media links here */}
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.form
+            onSubmit={handleSubmit}
+            className="contact-form"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <div className="form-group">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                rows="5"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              ></textarea>
+            </div>
+            <motion.button
+              type="submit"
+              className="submit-btn"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <FaPaperPlane className="send-icon" />
+              Send Message
+            </motion.button>
+          </motion.form>
+        </div>
       </div>
     </section>
   );
