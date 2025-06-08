@@ -79,6 +79,9 @@
   --tooltip-bg: #333;
   --tooltip-text: #fff;
 
+  --bg-color: #e8e8e8;
+  --bg-color-alt: #d0d0d0;
+
   /* ================ */
   /* Effects          */
   /* ================ */
@@ -176,6 +179,9 @@
   --contact-input-bg: #2d2d2d;
   --contact-input-text: #ffffff;
   --contact-input-border: #444444;
+
+  --bg-color: #232323;
+  --bg-color-alt: #1c1c1c;
 
   /* .home-title {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);

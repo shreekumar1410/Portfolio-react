@@ -1,6 +1,9 @@
+@import '../../assets/styles/variables.css';
+
+
 .contact-section {
   padding: 5rem 0;
-  background: var(--background);
+  /* background: var(--background); */
   position: relative;
   overflow: hidden;
 }

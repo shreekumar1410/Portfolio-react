@@ -327,3 +327,14 @@
     padding-top: var(--mobile-nav-height);
   }
 }
+
+.main-content > section {
+  padding: 60px 20px;
+  /* color: var(--text-color); */
+  background-color: var(--bg-color); /* default */
+}
+
+/* Alternate background for even sections */
+.main-content > section:nth-child(even) {
+  background-color: var(--bg-color-alt);
+}

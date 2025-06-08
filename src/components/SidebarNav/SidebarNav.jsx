@@ -10,8 +10,7 @@ import {
   faTimes,
   faMoon,
   faSun,
-  faGraduationCap, 
-  faBriefcase 
+  faGraduationCap 
 } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'react-tooltip';
 import './SidebarNav.css';

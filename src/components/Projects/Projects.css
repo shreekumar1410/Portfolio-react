@@ -1,6 +1,8 @@
+@import '../../assets/styles/variables.css';
+
 .projects-section {
   padding: 5rem 0;
-  background: var(--background);
+  /* background: var(--background); */
 }
 
 .section-title {

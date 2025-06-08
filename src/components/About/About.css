@@ -1,7 +1,7 @@
 @import '../../assets/styles/variables.css';
 
 .about-section {
-  background-color: var(--background);
+  /* background-color: var(--background); */
   color: var(--text-color);
 }
 
@@ -100,9 +100,9 @@
 #about .social-icon::after {
   content: attr(data-tooltip);
   position: absolute;
-  top: 85%; /* Position above the icon */
+  bottom: 100%; /* Position above the icon */
   left: 50%;
-  transform: translateX(-50%) translateY(10px); /* Start 10px below final position */
+  transform: translateX(-50%) translateY(-10px); /* Start 10px below final position */
   background-color: var(--tooltip-bg, #333);
   color: var(--tooltip-text, #fff);
   padding: 0.3rem 0.6rem;
@@ -114,12 +114,13 @@
   white-space: nowrap;
   pointer-events: none; /* Prevent tooltip from interfering with hover */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional subtle shadow */
+    z-index: 10; /* Ensure tooltip appears above other elements */
 }
 
 .social-icon:hover::after {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0); /* Final position - no vertical offset */
+  transform: translateX(-50%) translateY(-5); /* Final position - no vertical offset */
 }
 
 @media (max-width: 992px) {
