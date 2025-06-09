@@ -99,7 +99,7 @@
   left: 0;
   right: 0;
   background: rgba(var(--primary-rgb), 0.9);
-  color: white;
+  color: var(  --text-color);
   text-align: center;
   padding: 0.5rem;
   font-size: 0.9rem;

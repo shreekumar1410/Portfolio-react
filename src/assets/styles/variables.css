@@ -49,6 +49,9 @@
   /* ================ */
   /* Light Theme      */
   /* ================ */  
+
+   --background-light: #e6e6e6;;
+   
   --text-color: var(--gray-900);
   --text-light: var(--gray-600);
   --text-on-dark: var(--white);
@@ -124,6 +127,9 @@
   /* Links */
   --link-color: var(--primary-color);
   --link-hover: var(--primary-dark);
+
+  --box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1); /* For smaller shadows */
+  --z-index-tooltip: 1000; /* For consistent z-index management */
 }
 
 /* ==================== */
@@ -133,6 +139,7 @@
   --background: #121212;
   --background-alt: #1e1e1e;
   --background-dark: #1a1a1a;
+  --background-light: #23272f;
   
   --text-color: rgba(255, 255, 255, 0.87);
   --text-light: rgba(255, 255, 255, 0.6);
@@ -164,6 +171,8 @@
   /* Component Overrides */
   --sidebar-bg: #1a1a1a;
   --footer-bg: #1a1a1a;
+
+  --box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* ==================== */
