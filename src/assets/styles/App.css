@@ -7,9 +7,24 @@
   box-sizing: border-box;
 }
 
+
 html {
   scroll-behavior: smooth;
 }
+
+/* Scroll animation classes */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Your existing App.css styles below... */
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -83,6 +98,21 @@ section {
 
 .text-center {
   text-align: center;
+}
+
+.App {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Smooth transitions for dark mode elements */
+.dark {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Optional: Add transitions for specific elements that change in dark mode */
+.dark .text-element,
+.dark .background-element {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Import responsive styles */

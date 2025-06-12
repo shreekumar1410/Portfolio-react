@@ -13,6 +13,7 @@
   box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .sidebar.open {
@@ -134,7 +135,7 @@
   padding: var(--space-md);
   color: var(--sidebar-text);
   text-decoration: none;
-  transition: var(--transition-fast);
+  transition: color 0.2s ease, background-color 0.2s ease; 
   white-space: nowrap;
   margin: 0 var(--space-sm);
   border-radius: var(--border-radius-sm);
@@ -156,6 +157,7 @@
   margin-left: var(--space-md);
   opacity: 1;
   transition: var(--transition);
+  display: inline-block;
 }
 
 .sidebar.closed .nav-text {
@@ -178,7 +180,7 @@
   color: var(--sidebar-text);
   cursor: pointer;
   font-size: var(--sidebar-icon-size);
-  transition: var(--transition);
+  transition: transform 0.1s ease;
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--border-radius-sm);
   width: 100%;
@@ -191,6 +193,7 @@
 
 .theme-toggle-text {
   margin-left: var(--space-md);
+  display: inline-block;
 }
 
 /* Mobile Navbar */
@@ -207,6 +210,7 @@
   padding: 0 var(--space-md);
   z-index: 1000;
   box-shadow: var(--box-shadow);
+  overflow: hidden;
 }
 
 .mobile-nav-name {
@@ -229,6 +233,7 @@
   cursor: pointer;
   padding: var(--space-sm);
   border-radius: var(--border-radius-sm);
+  transition: transform 0.1s ease;
 }
 
 .mobile-menu-btn:hover {
@@ -257,7 +262,7 @@
   padding: var(--space-md);
   color: var(--header-text);
   text-decoration: none;
-  transition: var(--transition-fast);
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .mobile-nav-link:hover {

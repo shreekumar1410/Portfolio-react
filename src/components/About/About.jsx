@@ -1,51 +1,102 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { FaGithub, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { 
+  containerVariants, 
+  itemVariants, 
+  fadeIn,
+  slideInFromLeft,
+  slideInFromRight
+} from '../../utils/animations';
 import MyPhoto from '../../assets/images/My_New_Photo.png';
 import './About.css';
 
 const About = () => {
   return (
-    <section id="about" className="about-section">
+    <motion.section
+      id="about"
+      className="about-section"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.1 }}
+      variants={containerVariants}
+    >
       <div className="container">
-        <h2 className="section-title">About Me</h2>
-        <div className="about-content">
-          <div className="about-text">
-            <p>
+        <motion.h2 
+          className="section-title"
+          variants={itemVariants}
+        >
+          About Me
+        </motion.h2>
+        
+        <motion.div 
+          className="about-content"
+          variants={containerVariants}
+        >
+          <motion.div 
+            className="about-text"
+            variants={slideInFromLeft}
+          >
+            <motion.p variants={fadeIn}>
               <strong>Hi, I'm Shree Kumar!</strong><br />
               A creative Frontend & Web Developer from Chennai, passionate about 
               building interactive, user-friendly websites and applications. With a degree in 
               Information Technology and expertise in HTML, CSS, JavaScript, Python, SQL, and React, 
               I love turning ideas into functional and visually appealing digital experiences.
-            </p>
-            <p>
+            </motion.p>
+            <motion.p variants={fadeIn}>
               As a fresher, I bring fresh perspectives, a problem-solving mindset, and a hunger to 
               learn and grow in the ever-evolving world of web development. Whether it's debugging 
               code, optimizing performance, or crafting responsive designs, I thrive on challenges 
               that push me to innovate.
-            </p>
-            <div className="about-info">
-              <div className="info-item">
+            </motion.p>
+            
+            <motion.div 
+              className="about-info"
+              variants={containerVariants}
+            >
+              <motion.div 
+                className="info-item"
+                variants={itemVariants}
+              >
                 <span>Name:</span>
                 <p>Shree Kumar MB</p>
-              </div>
-              <div className="info-item">
+              </motion.div>
+              <motion.div 
+                className="info-item"
+                variants={itemVariants}
+              >
                 <span>Email:</span>
                 <p>shreekumarmb@gmail.com</p>
-              </div>
-              <div className="info-item">
+              </motion.div>
+              <motion.div 
+                className="info-item"
+                variants={itemVariants}
+              >
                 <span>Experience:</span>
                 <p>Fresher</p>
-              </div>
-              <div className="info-item">
+              </motion.div>
+              <motion.div 
+                className="info-item"
+                variants={itemVariants}
+              >
                 <span>From:</span>
                 <p>Chennai, India</p>
-              </div>
-            </div>
-          </div>
-          <div className="about-image">
-            <div className="image-wrapper">
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          <motion.div 
+            className="about-image"
+            variants={slideInFromRight}
+          >
+            <motion.div 
+              className="image-wrapper"
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <LazyLoadImage
                 src={MyPhoto}
                 alt="Shree Kumar"
@@ -54,49 +105,65 @@ const About = () => {
                 height="auto"
                 className="profile-photo"
               />
-            </div>
-            <div className="social_links">
-              <a 
+            </motion.div>
+            
+            <motion.div 
+              className="social_links"
+              variants={containerVariants}
+            >
+              <motion.a 
                 href="https://www.linkedin.com/in/shree-kumar-mb/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
                 data-tooltip="LinkedIn"
+                variants={itemVariants}
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <FaLinkedin />
-              </a>
-              <a 
+              </motion.a>
+              <motion.a 
                 href="https://github.com/shreekumar1410" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
                 data-tooltip="GitHub"
+                variants={itemVariants}
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <FaGithub />
-              </a>
-              <a 
+              </motion.a>
+              <motion.a 
                 href="https://x.com/ShreeKumar91905" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
                 data-tooltip="Twitter"
+                variants={itemVariants}
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <FaTwitter />
-              </a>
-              <a 
+              </motion.a>
+              <motion.a 
                 href="https://www.youtube.com/@shreekumarmb9924" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-icon"
                 data-tooltip="YouTube"
+                variants={itemVariants}
+                whileHover={{ y: -3, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
                 <FaYoutube />
-              </a>
-            </div>
-          </div>
-        </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

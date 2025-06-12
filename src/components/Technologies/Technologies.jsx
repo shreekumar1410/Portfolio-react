@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython } from 'react-icons/fa';
 import { SiFlask, SiC, SiMysql } from 'react-icons/si';
+import { 
+  containerVariants, 
+  itemVariants, 
+  fadeIn,
+  scaleUp
+} from '../../utils/animations';
 import './Technologies.css';
 
 const Technologies = () => {
-    const [activeTab, setActiveTab] = useState('education');
-  
-
   const [activeFilter, setActiveFilter] = useState('all');
   const [hoveredTech, setHoveredTech] = useState(null);
 
@@ -26,60 +30,88 @@ const Technologies = () => {
     : technologies.filter(tech => tech.category === activeFilter);
 
   return (
-    <section id="technologies" className="section">
+    <motion.section
+      id="technologies"
+      className="section"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.1 }}
+      variants={containerVariants}
+    >
       <div className="container">
-        <h2 className="section-title">Technologies I Know</h2>
+        <motion.h2 
+          className="section-title"
+          variants={itemVariants}
+        >
+          Technologies I Know
+        </motion.h2>
         
         {/* Filter Buttons */}
-        <div className="tech-filters">
-          <button 
-            className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('all')}
-          >
-            All
-          </button>
-          <button 
-            className={`filter-btn ${activeFilter === 'frontend' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('frontend')}
-          >
-            Frontend
-          </button>
-          <button 
-            className={`filter-btn ${activeFilter === 'backend' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('backend')}
-          >
-            Backend
-          </button>
-          <button 
-            className={`filter-btn ${activeFilter === 'database' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('database')}
-          >
-            Database
-          </button>
-        </div>
+        <motion.div 
+          className="tech-filters"
+          variants={containerVariants}
+        >
+          {['all', 'frontend', 'backend', 'database'].map((filter) => (
+            <motion.button
+              key={filter}
+              className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
+              onClick={() => setActiveFilter(filter)}
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {filter.charAt(0).toUpperCase() + filter.slice(1)}
+            </motion.button>
+          ))}
+        </motion.div>
 
         {/* Technology Grid */}
-        <div className="tech-grid">
+        <motion.div 
+          className="tech-grid"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ staggerChildren: 0.1 }}
+        >
           {filteredTechs.map((tech) => (
-            <div 
+            <motion.div 
               key={tech.id}
               className={`tech-card ${hoveredTech === tech.id ? 'hovered' : ''}`}
               onMouseEnter={() => setHoveredTech(tech.id)}
               onMouseLeave={() => setHoveredTech(null)}
+              variants={itemVariants}
+              whileHover={{ 
+                y: -5,
+                scale: 1.05,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="tech-icon">
+              <motion.div 
+                className="tech-icon"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
                 {React.cloneElement(tech.icon, { 
                   className: `tech-svg ${tech.category}` 
                 })}
-              </div>
+              </motion.div>
               {hoveredTech === tech.id && (
-                <div className="tech-name">{tech.name}</div>
+                <motion.div 
+                  className="tech-name"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                >
+                  {tech.name}
+                </motion.div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

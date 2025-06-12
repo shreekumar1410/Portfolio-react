@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -22,6 +23,78 @@ import Contact from '../Contact/Contact';
 import Footer from '../Footer/Footer';
 import EducationExperience from '../EducationExperience/EducationExperience';
 
+// Animation variants
+const sidebarVariants = {
+  open: { 
+    width: '250px',
+    transition: { duration: 0.3, ease: 'easeInOut' }
+  },
+  closed: { 
+    width: '80px',
+    transition: { duration: 0.3, ease: 'easeInOut' }
+  }
+};
+
+const navItemVariants = {
+  open: { 
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.2 }
+  },
+  closed: { 
+    opacity: 0,
+    x: -20,
+    transition: { duration: 0.1 }
+  }
+};
+const sidebarItemVariants = {
+  open: { 
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.2 }
+  },
+  closed: { 
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.1 }
+  }
+};
+
+const mobileMenuVariants = {
+  open: {
+    height: 'auto',
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1,
+      when: "beforeChildren"
+    }
+  },
+  closed: {
+    height: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1,
+      staggerDirection: -1,
+      when: "afterChildren"
+    }
+  }
+};
+
+const mobileItemVariants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.2 }
+  },
+  closed: {
+    y: -10,
+    opacity: 0,
+    transition: { duration: 0.1 }
+  }
+};
+
 const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -39,19 +112,15 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'education', 'technologies', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
-      // console.log(`Scroll position: ${scrollPosition}`);
 
       for (const section of sections) {
         const element = document.getElementById(section);
-        // console.log(`Element ID: ${section}`);
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-          // console.log(`Section: ${section}, Offset Top: ${offsetTop}, Offset Height: ${offsetHeight}`);
 
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section);
-            // console.log(`Active section: ${section}`);
             break;
           }
         }
@@ -61,8 +130,6 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     handleResize();
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
-    
-    // Initialize active section
     handleScroll();
 
     return () => {
@@ -78,7 +145,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     { name: 'Technologies', icon: faCode, href: '#technologies', section: 'technologies' },
     { name: 'Projects', icon: faProjectDiagram, href: '#projects', section: 'projects' },
     { name: 'Contact', icon: faEnvelope, href: '#contact', section: 'contact' }
-];
+  ];
 
   const handleSidebarHover = (hoverState) => {
     if (!isMobile) {
@@ -93,15 +160,22 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
     <>
       {/* Desktop Sidebar */}
       {!isMobile && (
-        <aside 
+        <motion.aside 
           className={`sidebar ${isOpen ? 'open' : 'closed'}`}
           onMouseEnter={() => handleSidebarHover(true)}
           onMouseLeave={() => handleSidebarHover(false)}
+          initial={false}
+          animate={isOpen ? 'open' : 'closed'}
+          variants={sidebarVariants}
         >
           <nav className="sidebar-nav">
             <ul>
               {navItems.map((item) => (
-                <li key={item.name}>
+                <motion.li 
+                  key={item.name}
+                  variants={sidebarItemVariants}
+                  animate={isOpen ? 'open' : 'closed'}
+                >
                   <a 
                     href={item.href} 
                     className={`nav-link ${activeSection === item.section ? 'active' : ''}`}
@@ -111,24 +185,40 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                     data-tooltip-place="right"
                   >
                     <FontAwesomeIcon icon={item.icon} className="nav-icon" />
-                    {isOpen && <span className="nav-text">{item.name}</span>}
+                    {isOpen && <motion.span 
+                      className="nav-text"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      {item.name}
+                    </motion.span>}
                   </a>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </nav>
-          <div className="theme-toggle-sidebar">
+          <motion.div 
+            className="theme-toggle-sidebar"
+            variants={navItemVariants}
+            animate={isOpen ? 'open' : 'closed'}
+          >
             <button 
               onClick={toggleDarkMode} 
               className="theme-toggle-btn"
               aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
             >
               <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-              {isOpen && <span className="theme-toggle-text">
+              {isOpen && <motion.span 
+                className="theme-toggle-text"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
+              >
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
-              </span>}
+              </motion.span>}
             </button>
-          </div>
+          </motion.div>
           
           {/* Tooltip for closed sidebar */}
           {!isOpen && (
@@ -138,48 +228,66 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
               variant={darkMode ? 'dark' : 'light'}
             />
           )}
-        </aside>
+        </motion.aside>
       )}
 
       {/* Mobile Navbar */}
       {isMobile && (
-        <header className="mobile-navbar">
+        <motion.header 
+          className="mobile-navbar"
+          initial={{ y: -50 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className="mobile-nav-name">Shree Kumar</div>
           <div className="mobile-nav-controls">
-            <button 
+            <motion.button 
               onClick={toggleDarkMode} 
               className="theme-toggle-btn"
               aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
+              whileTap={{ scale: 0.9 }}
             >
               <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-            </button>
-            <button 
+            </motion.button>
+            <motion.button 
               onClick={toggleMobileMenu} 
               className="mobile-menu-btn"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              whileTap={{ scale: 0.9 }}
             >
               <FontAwesomeIcon icon={mobileMenuOpen ? faTimes : faBars} />
-            </button>
+            </motion.button>
           </div>
-          {mobileMenuOpen && (
-            <nav className="mobile-nav">
-              <ul>
-                {navItems.map((item) => (
-                  <li key={item.name}>
-                    <a 
-                      href={item.href} 
-                      className={`mobile-nav-link ${activeSection === item.section ? 'active' : ''}`}
-                      onClick={closeMobileMenu}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.nav 
+                className="mobile-nav"
+                initial="closed"
+                animate="open"
+                exit="closed"
+                variants={mobileMenuVariants}
+              >
+                <ul>
+                  {navItems.map((item) => (
+                    <motion.li 
+                      key={item.name}
+                      variants={mobileItemVariants}
                     >
-                      <FontAwesomeIcon icon={item.icon} className="mobile-nav-icon" />
-                      <span>{item.name}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
-        </header>
+                      <a 
+                        href={item.href} 
+                        className={`mobile-nav-link ${activeSection === item.section ? 'active' : ''}`}
+                        onClick={closeMobileMenu}
+                      >
+                        <FontAwesomeIcon icon={item.icon} className="mobile-nav-icon" />
+                        <span>{item.name}</span>
+                      </a>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+        </motion.header>
       )}
 
       <main className="main-content">

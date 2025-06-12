@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { FaPaperPlane, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  containerVariants, 
+  itemVariants, 
+  fadeIn,
+  slideInFromLeft,
+  slideInFromRight
+} from '../../utils/animations';
 import './Contact.css';
 
 const Contact = () => {
@@ -10,6 +17,8 @@ const Contact = () => {
     message: ''
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,19 +27,27 @@ const Contact = () => {
     e.preventDefault();
     // Handle form submission
     console.log(formData);
-    // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    setIsSubmitted(true);
+    // Reset form after showing success message
+    setTimeout(() => {
+      setFormData({ name: '', email: '', message: '' });
+      setIsSubmitted(false);
+    }, 3000);
   };
 
   return (
-    <section id="contact" className="contact-section">
+    <motion.section
+      id="contact"
+      className="contact-section"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, amount: 0.1 }}
+      variants={containerVariants}
+    >
       <div className="container">
         <motion.h2 
           className="section-title"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
+          variants={itemVariants}
         >
           Get In Touch
         </motion.h2>
@@ -39,44 +56,43 @@ const Contact = () => {
           {/* Contact Info */}
           <motion.div 
             className="contact-info"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
+            variants={slideInFromLeft}
           >
-            <h3>Contact Information</h3>
-            <p>Feel free to reach out to me for any questions or opportunities!</p>
+            <motion.h3 variants={fadeIn}>Contact Information</motion.h3>
+            <motion.p variants={fadeIn}>
+              Feel free to reach out to me for any questions or opportunities!
+            </motion.p>
 
-            <ul className="info-list">
-              <li>
+            <motion.ul className="info-list">
+              <motion.li variants={itemVariants}>
                 <FaMapMarkerAlt className="info-icon" />
                 <span>Old Washermenpet, Chennai, India</span>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li variants={itemVariants}>
                 <FaPhone className="info-icon" />
                 <span>+91 7358314846</span>
-              </li>
-              <li>
+              </motion.li>
+              <motion.li variants={itemVariants}>
                 <FaEnvelope className="info-icon" />
                 <span>shreekumarmb@gmail.com</span>
-              </li>
-            </ul>
+              </motion.li>
+            </motion.ul>
 
-            <div className="social-links">
+            <motion.div className="social-links">
               {/* Add your social media links here */}
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
             className="contact-form"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
+            variants={slideInFromRight}
           >
-            <div className="form-group">
+            <motion.div 
+              className="form-group"
+              variants={itemVariants}
+            >
               <input
                 type="text"
                 name="name"
@@ -85,8 +101,11 @@ const Contact = () => {
                 onChange={handleChange}
                 required
               />
-            </div>
-            <div className="form-group">
+            </motion.div>
+            <motion.div 
+              className="form-group"
+              variants={itemVariants}
+            >
               <input
                 type="email"
                 name="email"
@@ -95,8 +114,11 @@ const Contact = () => {
                 onChange={handleChange}
                 required
               />
-            </div>
-            <div className="form-group">
+            </motion.div>
+            <motion.div 
+              className="form-group"
+              variants={itemVariants}
+            >
               <textarea
                 name="message"
                 placeholder="Your Message"
@@ -105,20 +127,38 @@ const Contact = () => {
                 onChange={handleChange}
                 required
               ></textarea>
-            </div>
-            <motion.button
-              type="submit"
-              className="submit-btn"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FaPaperPlane className="send-icon" />
-              Send Message
-            </motion.button>
+            </motion.div>
+            
+            <AnimatePresence>
+              {isSubmitted ? (
+                <motion.div
+                  className="success-message"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                >
+                  Message sent successfully!
+                </motion.div>
+              ) : (
+                <motion.button
+                  type="submit"
+                  className="submit-btn"
+                  variants={fadeIn}
+                  whileHover={{ 
+                    scale: 1.05,
+                    boxShadow: '0 5px 15px rgba(0,0,0,0.1)'
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <FaPaperPlane className="send-icon" />
+                  Send Message
+                </motion.button>
+              )}
+            </AnimatePresence>
           </motion.form>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
