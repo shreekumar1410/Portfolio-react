@@ -4,6 +4,7 @@ import { FaSearch, FaFilter, FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
 import { 
   containerVariants, 
   itemVariants, 
+  itemVariants_1, 
   fadeIn,
   scaleUp
 } from '../../utils/animations';
@@ -31,6 +32,41 @@ const Projects = () => {
     
     return matchesSearch && matchesFilter;
   });
+
+  const dropdownMenuVariants = {
+  open: {
+    height: 'auto',
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1,
+      when: "beforeChildren"
+    }
+  },
+  closed: {
+    height: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1,
+      staggerDirection: -1,
+      when: "afterChildren"
+    }
+  }
+};
+
+  const dropdownItemVariants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.2 }
+  },
+  closed: {
+    y: -10,
+    opacity: 0,
+    transition: { duration: 0.1 }
+  }
+};
 
   return (
     <motion.section
@@ -84,20 +120,22 @@ const Projects = () => {
               {isDropdownOpen && (
                 <motion.div 
                   className="dropdown-menu"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  variants={dropdownMenuVariants}
                 >
                   {categories.map((category) => (
                     <motion.button
                       key={category}
                       className={`dropdown-item ${filter === category ? 'active' : ''}`}
+                      variants={dropdownItemVariants}
+                      // initial="hidden"
                       onClick={() => {
                         setFilter(category);
                         setIsDropdownOpen(false);
                       }}
-                      whileHover={{ x: 5 }}
+                      whileHover={{ x: 0 }}
                       whileTap={{ scale: 0.95 }}
                     >
                       {category}
@@ -120,7 +158,7 @@ const Projects = () => {
                 <motion.div 
                   key={project.id}
                   className="project-card"
-                  variants={itemVariants}
+                  variants={scaleUp}
                   initial="hidden"
                   animate="visible"
                   exit={{ opacity: 0, scale: 0.8 }}
@@ -139,6 +177,8 @@ const Projects = () => {
                     <img src={project.img} alt={project.title} />
                     <motion.div 
                       className="project-links"
+                      // variants={fadeIn}
+                      transition={{ delay: 0.2 }}
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
                     >

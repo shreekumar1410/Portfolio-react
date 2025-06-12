@@ -200,7 +200,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
           </nav>
           <motion.div 
             className="theme-toggle-sidebar"
-            variants={navItemVariants}
+            variants={sidebarItemVariants}
             animate={isOpen ? 'open' : 'closed'}
           >
             <button 
