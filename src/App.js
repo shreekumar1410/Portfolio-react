@@ -6,7 +6,6 @@ import './assets/styles/App.css';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
-    // Check user's preference or use system preference
     return localStorage.getItem('darkMode') === 'true' || 
       (window.matchMedia('(prefers-color-scheme: dark)').matches && 
        localStorage.getItem('darkMode') !== 'false');
@@ -15,13 +14,20 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      document.body.style.backgroundColor = 'var(--background)';
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.style.backgroundColor = 'var(--background)';
-    }
+    const applyDarkMode = () => {
+      document.documentElement.style.transition = 'all 0.5s ease-in-out';
+      if (darkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      setTimeout(() => {
+        document.documentElement.style.transition = '';
+      }, 500);
+    };
+
+    applyDarkMode();
+    localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
 
   const toggleDarkMode = () => {

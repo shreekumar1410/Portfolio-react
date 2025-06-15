@@ -2,16 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faHome,
-  faUser,
-  faCode,
-  faProjectDiagram,
-  faEnvelope,
-  faBars,
-  faTimes,
-  faMoon,
-  faSun,
-  faGraduationCap 
+  faHome, faUser, faCode, faProjectDiagram, 
+  faEnvelope, faBars, faTimes, faMoon, faSun, faGraduationCap 
 } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'react-tooltip';
 import './SidebarNav.css';
@@ -42,19 +34,7 @@ const navItemVariants = {
     transition: { duration: 0.2 }
   },
   closed: { 
-    opacity: 0,
-    x: -20,
-    transition: { duration: 0.1 }
-  }
-};
-const sidebarItemVariants = {
-  open: { 
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.2 }
-  },
-  closed: { 
-    opacity: 1,
+    opacity: 1, // Changed to keep icons visible
     x: 0,
     transition: { duration: 0.1 }
   }
@@ -104,9 +84,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setMobileMenuOpen(false);
-      }
+      if (window.innerWidth >= 768) setMobileMenuOpen(false);
     };
 
     const handleScroll = () => {
@@ -118,7 +96,6 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section);
             break;
@@ -148,9 +125,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   ];
 
   const handleSidebarHover = (hoverState) => {
-    if (!isMobile) {
-      setIsOpen(hoverState);
-    }
+    if (!isMobile) setIsOpen(hoverState);
   };
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -173,7 +148,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
               {navItems.map((item) => (
                 <motion.li 
                   key={item.name}
-                  variants={sidebarItemVariants}
+                  variants={navItemVariants}
                   animate={isOpen ? 'open' : 'closed'}
                 >
                   <a 
@@ -184,15 +159,21 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                     data-tooltip-content={item.name}
                     data-tooltip-place="right"
                   >
-                    <FontAwesomeIcon icon={item.icon} className="nav-icon" />
-                    {isOpen && <motion.span 
-                      className="nav-text"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      {item.name}
-                    </motion.span>}
+                    <FontAwesomeIcon 
+                      icon={item.icon} 
+                      className="nav-icon" 
+                      style={{ fontSize: isOpen ? '1rem' : '1.2rem' }}
+                    />
+                    {isOpen && (
+                      <motion.span 
+                        className="nav-text"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        {item.name}
+                      </motion.span>
+                    )}
                   </a>
                 </motion.li>
               ))}
@@ -200,27 +181,40 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
           </nav>
           <motion.div 
             className="theme-toggle-sidebar"
-            variants={sidebarItemVariants}
+            variants={navItemVariants}
             animate={isOpen ? 'open' : 'closed'}
           >
-            <button 
-              onClick={toggleDarkMode} 
+            <motion.button 
+              onClick={toggleDarkMode}
               className="theme-toggle-btn"
               aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-              {isOpen && <motion.span 
-                className="theme-toggle-text"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
-              >
-                {darkMode ? 'Light Mode' : 'Dark Mode'}
-              </motion.span>}
-            </button>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={darkMode ? 'dark' : 'light'}
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 20, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+                </motion.span>
+              </AnimatePresence>
+              {isOpen && (
+                <motion.span 
+                  className="theme-toggle-text"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  {darkMode ? 'Light Mode' : 'Dark Mode'}
+                </motion.span>
+              )}
+            </motion.button>
           </motion.div>
           
-          {/* Tooltip for closed sidebar */}
           {!isOpen && (
             <Tooltip
               id="sidebar-tooltip"
