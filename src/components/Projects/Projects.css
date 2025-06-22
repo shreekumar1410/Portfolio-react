@@ -41,7 +41,7 @@
   padding: 0.8rem 1.5rem 0.8rem 2.5rem;
   border: 1px solid var(--border-color);
   border-radius: 50px;
-  background: var(--background-light);
+  background: var(--background-light1);
   color: var(--text-color);
   transition: all 0.3s ease;
 }
@@ -70,7 +70,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.5rem;
-  background: var(--background-light);
+  background: var(--background-light1);
   border: 1px solid var(--border-color);
   border-radius: 50px;
   color: var(--text-color);

@@ -3,12 +3,20 @@ import { motion } from 'framer-motion';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython } from 'react-icons/fa';
 import { SiFlask, SiC, SiMysql } from 'react-icons/si';
 import { 
-  containerVariants, 
-  itemVariants, 
-  fadeIn,
-  scaleUp
+  professionalSlideIn,
+  techPopIn,
+  techContainer,
+  techButtonSlide
 } from '../../utils/animations';
 import './Technologies.css';
+
+// Tech-focused animation configuration
+const animationConfig = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, margin: "-30px" },
+  transition: { duration: 0.8 }
+};
 
 const Technologies = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -33,15 +41,14 @@ const Technologies = () => {
     <motion.section
       id="technologies"
       className="section"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
-      variants={containerVariants}
+      {...animationConfig}
+      variants={techContainer}
     >
       <div className="container">
         <motion.h2 
           className="section-title"
-          variants={itemVariants}
+          {...animationConfig}
+          variants={professionalSlideIn}
         >
           Technologies I Know
         </motion.h2>
@@ -49,16 +56,37 @@ const Technologies = () => {
         {/* Filter Buttons */}
         <motion.div 
           className="tech-filters"
-          variants={containerVariants}
+          {...animationConfig}
+          variants={techContainer}
         >
-          {['all', 'frontend', 'backend', 'database'].map((filter) => (
+          {['all', 'frontend', 'backend', 'database'].map((filter, index) => (
             <motion.button
               key={filter}
               className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
               onClick={() => setActiveFilter(filter)}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              {...animationConfig}
+              variants={techButtonSlide}
+              transition={{ 
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 150,
+                damping: 12
+              }}
+              whileHover={{ 
+                scale: 1.1,
+                y: -3,
+                rotate: 2,
+                transition: { 
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 10
+                }
+              }}
+              whileTap={{ 
+                scale: 0.9,
+                rotate: -2,
+                transition: { duration: 0.1 }
+              }}
             >
               {filter.charAt(0).toUpperCase() + filter.slice(1)}
             </motion.button>
@@ -68,30 +96,53 @@ const Technologies = () => {
         {/* Technology Grid */}
         <motion.div 
           className="tech-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ staggerChildren: 0.1 }}
+          key={activeFilter} // Re-trigger animation on filter change
+          {...animationConfig}
+          variants={techContainer}
         >
-          {filteredTechs.map((tech) => (
+          {filteredTechs.map((tech, index) => (
             <motion.div 
               key={tech.id}
               className={`tech-card ${hoveredTech === tech.id ? 'hovered' : ''}`}
               onMouseEnter={() => setHoveredTech(tech.id)}
               onMouseLeave={() => setHoveredTech(null)}
-              variants={itemVariants}
-              whileHover={{ 
-                y: -5,
-                scale: 1.05,
-                transition: { duration: 0.2 }
+              {...animationConfig}
+              variants={techPopIn}
+              transition={{ 
+                delay: index * 0.08,
+                type: "spring",
+                stiffness: 200,
+                damping: 15
               }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ 
+                scale: 1.15,
+                rotate: 10,
+                y: -10,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+                transition: { 
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 10
+                }
+              }}
+              whileTap={{ 
+                scale: 0.9,
+                rotate: -5,
+                transition: { duration: 0.1 }
+              }}
             >
               <motion.div 
                 className="tech-icon"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 300 }}
+                variants={techPopIn}
+                whileHover={{
+                  scale: 1.2,
+                  y: -8,
+                  transition: { 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 15
+                  }
+                }}
               >
                 {React.cloneElement(tech.icon, { 
                   className: `tech-svg ${tech.category}` 
@@ -100,9 +151,23 @@ const Technologies = () => {
               {hoveredTech === tech.id && (
                 <motion.div 
                   className="tech-name"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                  animate={{ 
+                    opacity: 1, 
+                    scale: 1, 
+                    y: 0,
+                    transition: {
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20
+                    }
+                  }}
+                  exit={{ 
+                    opacity: 0, 
+                    scale: 0.5, 
+                    y: 20,
+                    transition: { duration: 0.2 }
+                  }}
                 >
                   {tech.name}
                 </motion.div>

@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  containerVariants, 
-  itemVariants, 
-  slideInFromLeft, 
+  containerVariants,
+  slideInFromLeft,
   slideInFromRight,
-  scaleUp,
-  fadeIn
+  fadeInWithSlideUp,
+  scaleUpWithFade
 } from '../../utils/animations';
 import profileImage from '../../assets/images/My_New_Photo.png';
 import cvFile from '../../assets/files/Shree_Kumar_CV.pdf';
 import './Home.css';
+
+// Unified animation configuration
+const animationConfig = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, margin: "-30px" },
+  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+};
 
 const Home = () => {
   const [text, setText] = useState('');
@@ -50,52 +57,68 @@ const Home = () => {
     <motion.section
       id="home"
       className="home-section"
-      initial="hidden"
-      // animate="visible"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
+      {...animationConfig}
       variants={containerVariants}
     >
       <motion.div 
         className="home-container"
-        variants={containerVariants}
+        {...animationConfig}
+        variants={slideInFromLeft}
       >
         <motion.div 
           className="home-content"
-          variants={itemVariants}
+          {...animationConfig}
+          transition={{ ...animationConfig.transition, staggerChildren: 0.1 }}
         >
           <motion.h2 
             className="home-greeting"
+            {...animationConfig}
             variants={slideInFromLeft}
           >
             Hello, I'm
           </motion.h2>
+          
           <motion.h1 
             className="home-title"
-            variants={slideInFromRight}
+            {...animationConfig}
+            variants={slideInFromLeft}
+            transition={{ ...animationConfig.transition, delay: 0.1 }}
           >
-            Shree Kumar
+            SHREE KUMAR
           </motion.h1>
+          
           <motion.h2 
             className="home-subtitle"
-            variants={fadeIn}
+            {...animationConfig}
+            variants={slideInFromLeft}
+            transition={{ ...animationConfig.transition, delay: 0.2 }}
           >
             <span className="typed-text">{text}</span>
             <span className="cursor">&nbsp;</span>
           </motion.h2>
+          
           <motion.p 
             className="home-description"
-            variants={fadeIn}
+            {...animationConfig}
+            variants={slideInFromLeft}
+            transition={{ ...animationConfig.transition, delay: 0.3 }}
           >
             I'm a passionate developer based in Chennai, and I'm very dedicated
             to creating efficient, user-friendly web applications.
           </motion.p>
+          
           <motion.a 
             href={cvFile} 
             download="Shree_Kumar_CV.pdf"
             className="home-button"
-            variants={scaleUp}
-            whileHover={{ scale: 1.05 }}
+            {...animationConfig}
+            variants={scaleUpWithFade}
+            transition={{ ...animationConfig.transition, delay: 0.4 }}
+            whileHover={{ 
+              scale: 1.05,
+              boxShadow: '0 5px 15px rgba(0,0,0,0.1)',
+              transition: { duration: 0.3 }
+            }}
             whileTap={{ scale: 0.95 }}
           >
             Download CV
@@ -104,13 +127,17 @@ const Home = () => {
 
         <motion.div 
           className="home-image"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.3, type: 'spring' }}
+          {...animationConfig}
+          variants={slideInFromRight}
+          transition={{ ...animationConfig.transition, delay: 0.5 }}
+          whileHover={{
+            scale: 1.03,
+            transition: { duration: 0.3 }
+          }}
         >
           <img 
             src={profileImage} 
-            alt="Shree Kumar" 
+            alt="Shree Kumar MB" 
             className="profile-photo"
           />
         </motion.div>

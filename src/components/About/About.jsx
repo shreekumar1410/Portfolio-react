@@ -4,49 +4,80 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { FaGithub, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { 
-  containerVariants, 
-  itemVariants, 
-  fadeIn,
-  slideInFromLeft,
-  slideInFromRight
+  fadeInWithSlideUp, // New unified animation variant
+  slideInFromLeft, 
+  scaleUpWithFade
 } from '../../utils/animations';
 import MyPhoto from '../../assets/images/My_New_Photo.png';
 import './About.css';
+
+// Animation configuration
+const animationSettings = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, margin: "-50px" },
+  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+};
 
 const About = () => {
   return (
     <motion.section
       id="about"
       className="about-section"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
-      variants={containerVariants}
+      {...animationSettings}
+      variants={{
+        visible: { 
+          transition: { 
+            staggerChildren: 0.1,
+            when: "beforeChildren"
+          } 
+        }
+      }}
     >
       <div className="container">
         <motion.h2 
           className="section-title"
-          variants={itemVariants}
+          {...animationSettings}
+          variants={fadeInWithSlideUp}
         >
           About Me
         </motion.h2>
         
         <motion.div 
           className="about-content"
-          variants={containerVariants}
+          {...animationSettings}
+          transition={{ ...animationSettings.transition, staggerChildren: 0.1 }}
         >
+          {/* Text Content - Left Side */}
           <motion.div 
             className="about-text"
-            variants={slideInFromLeft}
+            {...animationSettings}
+            variants={fadeInWithSlideUp}
           >
-            <motion.p variants={fadeIn}>
-              <strong>Hi, I'm Shree Kumar!</strong><br />
+            <motion.strong
+              {...animationSettings}
+              variants={fadeInWithSlideUp}
+              transition={{ ...animationSettings.transition }}
+            >
+              Hi, I'm Shree Kumar!
+            </motion.strong>
+            
+            <motion.p 
+              {...animationSettings}
+              variants={fadeInWithSlideUp}
+              transition={{ ...animationSettings.transition, delay: 0.1 }}
+            >
               A creative Frontend & Web Developer from Chennai, passionate about 
               building interactive, user-friendly websites and applications. With a degree in 
               Information Technology and expertise in HTML, CSS, JavaScript, Python, SQL, and React, 
               I love turning ideas into functional and visually appealing digital experiences.
             </motion.p>
-            <motion.p variants={fadeIn}>
+            
+            <motion.p 
+              {...animationSettings}
+              variants={fadeInWithSlideUp}
+              transition={{ ...animationSettings.transition, delay: 0.3 }}
+            >
               As a fresher, I bring fresh perspectives, a problem-solving mindset, and a hunger to 
               learn and grow in the ever-evolving world of web development. Whether it's debugging 
               code, optimizing performance, or crafting responsive designs, I thrive on challenges 
@@ -55,47 +86,52 @@ const About = () => {
             
             <motion.div 
               className="about-info"
-              variants={containerVariants}
+              {...animationSettings}
+              variants={fadeInWithSlideUp}
+              transition={{ ...animationSettings.transition, delay: 0.4, staggerChildren: 0.1 }}
             >
-              <motion.div 
-                className="info-item"
-                variants={itemVariants}
-              >
-                <span>Name:</span>
-                <p>Shree Kumar MB</p>
-              </motion.div>
-              <motion.div 
-                className="info-item"
-                variants={itemVariants}
-              >
-                <span>Email:</span>
-                <p>shreekumarmb@gmail.com</p>
-              </motion.div>
-              <motion.div 
-                className="info-item"
-                variants={itemVariants}
-              >
-                <span>Experience:</span>
-                <p>Fresher</p>
-              </motion.div>
-              <motion.div 
-                className="info-item"
-                variants={itemVariants}
-              >
-                <span>From:</span>
-                <p>Chennai, India</p>
-              </motion.div>
+              {[
+                { label: 'Name:', value: 'Shree Kumar MB' },
+                { label: 'Email:', value: 'shreekumarmb@gmail.com' },
+                { label: 'Experience:', value: 'Fresher' },
+                { label: 'From:', value: 'Chennai, India' }
+              ].map((item, index) => (
+                <motion.div 
+                  key={item.label}
+                  className="info-item"
+                  variants={fadeInWithSlideUp}
+                  transition={{ ...animationSettings.transition, delay: 0.4 + index * 0.1 }}
+                  whileHover={{ 
+                    x: 5,
+                    backgroundColor: 'rgba(0,0,0,0.03)',
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <span>{item.label}</span>
+                  <p>{item.value}</p>
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
 
+          {/* Image Content - Right Side */}
           <motion.div 
             className="about-image"
-            variants={slideInFromRight}
+            {...animationSettings}
+            variants={scaleUpWithFade}
+            transition={{ ...animationSettings.transition, delay: 0.4 }}
           >
             <motion.div 
               className="image-wrapper"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              whileHover={{ 
+                scale: 1.03,
+                boxShadow: '0 15px 30px rgba(0,0,0,0.1)'
+              }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300,
+                damping: 10
+              }}
             >
               <LazyLoadImage
                 src={MyPhoto}
@@ -109,56 +145,35 @@ const About = () => {
             
             <motion.div 
               className="social_links"
-              variants={containerVariants}
+              {...animationSettings}
+              variants={fadeInWithSlideUp}
+              transition={{ ...animationSettings.transition, delay: 0.5, staggerChildren: 0.1 }}
             >
-              <motion.a 
-                href="https://www.linkedin.com/in/shree-kumar-mb/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="social-icon"
-                data-tooltip="LinkedIn"
-                variants={itemVariants}
-                whileHover={{ y: -3, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaLinkedin />
-              </motion.a>
-              <motion.a 
-                href="https://github.com/shreekumar1410" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="social-icon"
-                data-tooltip="GitHub"
-                variants={itemVariants}
-                whileHover={{ y: -3, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaGithub />
-              </motion.a>
-              <motion.a 
-                href="https://x.com/ShreeKumar91905" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="social-icon"
-                data-tooltip="Twitter"
-                variants={itemVariants}
-                whileHover={{ y: -3, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaTwitter />
-              </motion.a>
-              <motion.a 
-                href="https://www.youtube.com/@shreekumarmb9924" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="social-icon"
-                data-tooltip="YouTube"
-                variants={itemVariants}
-                whileHover={{ y: -3, scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaYoutube />
-              </motion.a>
+              {[
+                { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/shree-kumar-mb/', color: '#0A66C2' },
+                { icon: <FaGithub />, url: 'https://github.com/shreekumar1410', color: '#333' },
+                { icon: <FaTwitter />, url: 'https://x.com/ShreeKumar91905', color: '#1DA1F2' },
+                { icon: <FaYoutube />, url: 'https://www.youtube.com/@shreekumarmb9924', color: '#FF0000' }
+              ].map((social, index) => (
+                <motion.a 
+                  key={social.url}
+                  href={social.url}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  variants={fadeInWithSlideUp}
+                  transition={{ ...animationSettings.transition, delay: 0.5 + index * 0.1 }}
+                  whileHover={{ 
+                    y: -5, 
+                    scale: 1.1,
+                    color: social.color,
+                    transition: { type: 'spring' }
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {social.icon}
+                </motion.a>
+              ))}
             </motion.div>
           </motion.div>
         </motion.div>

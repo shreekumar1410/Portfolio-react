@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGraduationCap, FaBriefcase, FaChevronRight } from 'react-icons/fa';
 import { 
-  containerVariants, 
-  itemVariants, 
-  fadeIn,
-  slideInFromLeft,
-  slideInFromRight
+  professionalSlideIn,
+  professionalContainer
 } from '../../utils/animations';
 import './EducationExperience.css';
+
+// Unified animation configuration
+const animationConfig = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, margin: "-50px" },
+  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+};
 
 const EducationExperience = () => {
   const [activeTab, setActiveTab] = useState('education');
@@ -66,28 +71,33 @@ const EducationExperience = () => {
     <motion.section
       id="education"
       className="section"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
-      variants={containerVariants}
+      {...animationConfig}
+      variants={professionalContainer}
     >
       <div className="container">
         <motion.h2 
           className="section-title"
-          variants={itemVariants}
+          {...animationConfig}
+          variants={professionalSlideIn}
         >
           My Journey
         </motion.h2>
 
         <motion.div 
           className="tab-switcher"
-          variants={containerVariants}
+          {...animationConfig}
+          variants={professionalContainer}
         >
           <motion.button
             className={`tab-btn ${activeTab === 'education' ? 'active' : ''}`}
             onClick={() => setActiveTab('education')}
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
+            {...animationConfig}
+            variants={professionalSlideIn}
+            whileHover={{ 
+              scale: 1.05,
+              y: -2,
+              transition: { duration: 0.2 }
+            }}
             whileTap={{ scale: 0.95 }}
           >
             <FaGraduationCap /> Education
@@ -95,8 +105,13 @@ const EducationExperience = () => {
           <motion.button
             className={`tab-btn ${activeTab === 'experience' ? 'active' : ''}`}
             onClick={() => setActiveTab('experience')}
-            variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
+            {...animationConfig}
+            variants={professionalSlideIn}
+            whileHover={{ 
+              scale: 1.05,
+              y: -2,
+              transition: { duration: 0.2 }
+            }}
             whileTap={{ scale: 0.95 }}
           >
             <FaBriefcase /> Experience
@@ -105,51 +120,86 @@ const EducationExperience = () => {
 
         <motion.div 
           className="timeline"
-          variants={containerVariants}
+          {...animationConfig}
+          variants={professionalContainer}
         >
           <AnimatePresence mode="wait">
             {(activeTab === 'education' ? educationData : experienceData).map((item, index) => (
               <motion.div 
                 key={item.id} 
                 className={`timeline-item ${activeTab}`}
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
+                {...animationConfig}
+                variants={professionalSlideIn}
+                transition={{ 
+                  ...animationConfig.transition, 
+                  delay: index * 0.1 
+                }}
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.02,
+                  boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                  transition: { duration: 0.3 }
+                }}
               >
                 <motion.div 
                   className="timeline-icon"
-                  whileHover={{ scale: 1.1 }}
+                  {...animationConfig}
+                  variants={professionalSlideIn}
+                  whileHover={{ 
+                    scale: 1.15,
+                    rotate: 5,
+                    transition: { duration: 0.2 }
+                  }}
                 >
                   {item.icon}
                 </motion.div>
                 <motion.div 
                   className="timeline-content"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 + 0.2 }}
+                  {...animationConfig}
+                  variants={professionalSlideIn}
+                  transition={{ 
+                    ...animationConfig.transition, 
+                    delay: index * 0.1 + 0.1 
+                  }}
                 >
-                  <div className="timeline-header">
+                  <motion.div 
+                    className="timeline-header"
+                    {...animationConfig}
+                    variants={professionalSlideIn}
+                  >
                     <h3>{activeTab === 'education' ? item.degree : item.role}</h3>
                     <span className="period">{item.period}</span>
-                  </div>
-                  <h4>{activeTab === 'education' ? item.institution : item.company}</h4>
-                  <ul className="details-list">
+                  </motion.div>
+                  <motion.h4
+                    {...animationConfig}
+                    variants={professionalSlideIn}
+                  >
+                    {activeTab === 'education' ? item.institution : item.company}
+                  </motion.h4>
+                  <motion.ul 
+                    className="details-list"
+                    {...animationConfig}
+                    variants={professionalContainer}
+                  >
                     {item.details.map((detail, i) => (
                       <motion.li 
                         key={i}
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 + 0.3 + i * 0.05 }}
+                        {...animationConfig}
+                        variants={professionalSlideIn}
+                        transition={{ 
+                          ...animationConfig.transition, 
+                          delay: index * 0.1 + 0.2 + i * 0.05 
+                        }}
+                        whileHover={{
+                          x: 5,
+                          color: "#007bff",
+                          transition: { duration: 0.2 }
+                        }}
                       >
                         {detail}
-                        {/* <FaChevronRight className="bullet-icon" /> */}
-                        
                       </motion.li>
                     ))}
-                  </ul>
+                  </motion.ul>
                 </motion.div>
               </motion.div>
             ))}

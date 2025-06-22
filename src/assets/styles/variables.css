@@ -50,7 +50,8 @@
   /* Light Theme      */
   /* ================ */  
 
-   --background-light: #e6e6e6;;
+  --background-light: #e6e6e6;
+  --background-light1: #d6d6d6;
    
   --text-color: var(--gray-900);
   --text-light: var(--gray-600);
@@ -136,10 +137,10 @@
 /* Dark Theme Overrides */
 /* ==================== */
 .dark {
-  --background: #121212;
   --background-alt: #1e1e1e;
   --background-dark: #1a1a1a;
   --background-light: #23272f;
+  --background-light1: #121212;
   
   --text-color: rgba(255, 255, 255, 0.87);
   --text-light: rgba(255, 255, 255, 0.6);

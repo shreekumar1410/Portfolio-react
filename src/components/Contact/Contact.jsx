@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import { FaPaperPlane, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  containerVariants, 
-  itemVariants, 
-  fadeIn,
-  slideInFromLeft,
-  slideInFromRight
+  contactSlideIn,
+  contactContainer,
+  contactFormInput,
+  contactInfoItem
 } from '../../utils/animations';
 import './Contact.css';
+
+// Professional contact animation configuration
+const animationConfig = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, margin: "-40px" },
+  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -39,46 +46,78 @@ const Contact = () => {
     <motion.section
       id="contact"
       className="contact-section"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
-      variants={containerVariants}
+      {...animationConfig}
+      variants={contactContainer}
     >
       <div className="container">
         <motion.h2 
           className="section-title"
-          variants={itemVariants}
+          {...animationConfig}
+          variants={contactSlideIn}
         >
           Get In Touch
         </motion.h2>
 
-        <div className="contact-content">
+        <motion.div 
+          className="contact-content"
+          {...animationConfig}
+          variants={contactContainer}
+        >
           {/* Contact Info */}
           <motion.div 
             className="contact-info"
-            variants={slideInFromLeft}
+            {...animationConfig}
+            variants={contactContainer}
           >
-            <motion.h3 variants={fadeIn}>Contact Information</motion.h3>
-            <motion.p variants={fadeIn}>
+            <motion.h3 
+              {...animationConfig}
+              variants={contactSlideIn}
+            >
+              Contact Information
+            </motion.h3>
+            <motion.p 
+              {...animationConfig}
+              variants={contactSlideIn}
+              transition={{ ...animationConfig.transition, delay: 0.1 }}
+            >
               Feel free to reach out to me for any questions or opportunities!
             </motion.p>
 
-            <motion.ul className="info-list">
-              <motion.li variants={itemVariants}>
-                <FaMapMarkerAlt className="info-icon" />
-                <span>Old Washermenpet, Chennai, India</span>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <FaPhone className="info-icon" />
-                <span>+91 7358314846</span>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <FaEnvelope className="info-icon" />
-                <span>shreekumarmb@gmail.com</span>
-              </motion.li>
+            <motion.ul 
+              className="info-list"
+              {...animationConfig}
+              variants={contactContainer}
+            >
+              {[
+                { icon: <FaMapMarkerAlt />, text: "Old Washermenpet, Chennai, India" },
+                { icon: <FaPhone />, text: "+91 7358314846" },
+                { icon: <FaEnvelope />, text: "shreekumarmb@gmail.com" }
+              ].map((item, index) => (
+                <motion.li 
+                  key={index}
+                  {...animationConfig}
+                  variants={contactInfoItem}
+                  transition={{ 
+                    ...animationConfig.transition, 
+                    delay: index * 0.1 
+                  }}
+                  whileHover={{
+                    x: 8,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <span className="info-icon">{item.icon}</span>
+                  <span>{item.text}</span>
+                </motion.li>
+              ))}
             </motion.ul>
 
-            <motion.div className="social-links">
+            <motion.div 
+              className="social-links"
+              {...animationConfig}
+              variants={contactSlideIn}
+              transition={{ ...animationConfig.transition, delay: 0.4 }}
+            >
               {/* Add your social media links here */}
             </motion.div>
           </motion.div>
@@ -87,66 +126,96 @@ const Contact = () => {
           <motion.form
             onSubmit={handleSubmit}
             className="contact-form"
-            variants={slideInFromRight}
+            {...animationConfig}
+            variants={contactContainer}
           >
             <motion.div 
               className="form-group"
-              variants={itemVariants}
+              {...animationConfig}
+              variants={contactFormInput}
+              transition={{ ...animationConfig.transition, delay: 0.1 }}
             >
-              <input
+              <motion.input
                 type="text"
                 name="name"
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
                 required
+                whileFocus={{
+                  scale: 1.02,
+                  boxShadow: "0 0 0 2px rgba(0,123,255,0.2)",
+                  transition: { duration: 0.2 }
+                }}
               />
             </motion.div>
             <motion.div 
               className="form-group"
-              variants={itemVariants}
+              {...animationConfig}
+              variants={contactFormInput}
+              transition={{ ...animationConfig.transition, delay: 0.2 }}
             >
-              <input
+              <motion.input
                 type="email"
                 name="email"
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                whileFocus={{
+                  scale: 1.02,
+                  boxShadow: "0 0 0 2px rgba(0,123,255,0.2)",
+                  transition: { duration: 0.2 }
+                }}
               />
             </motion.div>
             <motion.div 
               className="form-group"
-              variants={itemVariants}
+              {...animationConfig}
+              variants={contactFormInput}
+              transition={{ ...animationConfig.transition, delay: 0.3 }}
             >
-              <textarea
+              <motion.textarea
                 name="message"
                 placeholder="Your Message"
                 rows="5"
                 value={formData.message}
                 onChange={handleChange}
                 required
-              ></textarea>
+                whileFocus={{
+                  scale: 1.02,
+                  boxShadow: "0 0 0 2px rgba(0,123,255,0.2)",
+                  transition: { duration: 0.2 }
+                }}
+              />
             </motion.div>
             
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {isSubmitted ? (
                 <motion.div
                   className="success-message"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
+                  key="success"
+                  {...animationConfig}
+                  variants={contactSlideIn}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
                 >
                   Message sent successfully!
                 </motion.div>
               ) : (
                 <motion.button
+                  key="submit"
                   type="submit"
                   className="submit-btn"
-                  variants={fadeIn}
+                  {...animationConfig}
+                  variants={contactSlideIn}
+                  transition={{ ...animationConfig.transition, delay: 0.4 }}
                   whileHover={{ 
                     scale: 1.05,
-                    boxShadow: '0 5px 15px rgba(0,0,0,0.1)'
+                    y: -2,
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.12)',
+                    transition: { duration: 0.2 }
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -156,7 +225,7 @@ const Contact = () => {
               )}
             </AnimatePresence>
           </motion.form>
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

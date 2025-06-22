@@ -2,14 +2,67 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaSearch, FaFilter, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { 
-  containerVariants, 
-  itemVariants, 
-  itemVariants_1, 
-  fadeIn,
-  scaleUp
+  projectSlideIn,
+  projectContainer,
+  projectFadeUp
 } from '../../utils/animations';
 import projectsData from './projectsData.js';
 import './Projects.css';
+
+// Professional animation configuration
+const animationConfig = {
+  initial: "hidden",
+  whileInView: "visible",
+  viewport: { once: false, margin: "-40px" },
+  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+};
+
+// Professional dropdown animations
+const dropdownMenuVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.08,
+      when: "beforeChildren"
+    }
+  },
+  closed: {
+    opacity: 0,
+    y: -20,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.05,
+      staggerDirection: -1
+    }
+  }
+};
+
+const dropdownItemVariants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { 
+      duration: 0.25,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  },
+  closed: {
+    y: -15,
+    opacity: 0,
+    scale: 0.95,
+    transition: { 
+      duration: 0.15,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
 
 const Projects = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -33,66 +86,36 @@ const Projects = () => {
     return matchesSearch && matchesFilter;
   });
 
-  const dropdownMenuVariants = {
-  open: {
-    height: 'auto',
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-      when: "beforeChildren"
-    }
-  },
-  closed: {
-    height: 0,
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-      staggerDirection: -1,
-      when: "afterChildren"
-    }
-  }
-};
-
-  const dropdownItemVariants = {
-  open: {
-    y: 0,
-    opacity: 1,
-    transition: { duration: 0.2 }
-  },
-  closed: {
-    y: -10,
-    opacity: 0,
-    transition: { duration: 0.1 }
-  }
-};
-
   return (
     <motion.section
       id="projects"
       className="projects-section"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
-      variants={containerVariants}
+      {...animationConfig}
+      variants={projectContainer}
     >
       <div className="container">
         <motion.h2 
           className="section-title"
-          variants={itemVariants}
+          {...animationConfig}
+          variants={projectSlideIn}
         >
           My Projects
         </motion.h2>
         
         <motion.div 
           className="projects-filter"
-          variants={containerVariants}
+          {...animationConfig}
+          variants={projectContainer}
         >
           <motion.div 
             className="search-box"
-            variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
+            {...animationConfig}
+            variants={projectFadeUp}
+            whileHover={{ 
+              scale: 1.02,
+              boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
+              transition: { duration: 0.2 }
+            }}
           >
             <FaSearch className="search-icon" />
             <input
@@ -105,12 +128,19 @@ const Projects = () => {
           
           <motion.div 
             className="dropdown-filter"
-            variants={itemVariants}
+            {...animationConfig}
+            variants={projectFadeUp}
+            transition={{ ...animationConfig.transition, delay: 0.1 }}
           >
             <motion.button 
               className="dropdown-toggle"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ 
+                scale: 1.05,
+                y: -2,
+                boxShadow: '0 5px 15px rgba(0,0,0,0.1)',
+                transition: { duration: 0.2 }
+              }}
               whileTap={{ scale: 0.95 }}
             >
               <FaFilter /> {filter === 'all' ? 'All Categories' : filter}
@@ -129,13 +159,16 @@ const Projects = () => {
                     <motion.button
                       key={category}
                       className={`dropdown-item ${filter === category ? 'active' : ''}`}
-                      variants={dropdownItemVariants}
-                      // initial="hidden"
                       onClick={() => {
                         setFilter(category);
                         setIsDropdownOpen(false);
                       }}
-                      whileHover={{ x: 0 }}
+                      variants={dropdownItemVariants}
+                      whileHover={{ 
+                        x: 8,
+                        backgroundColor: 'var(--primary-light)',
+                        transition: { duration: 0.2 }
+                      }}
                       whileTap={{ scale: 0.95 }}
                     >
                       {category}
@@ -149,44 +182,59 @@ const Projects = () => {
 
         <motion.div 
           className="projects-grid"
-          variants={containerVariants}
-          layout
+          {...animationConfig}
+          variants={projectContainer}
+          key={filter} // Re-trigger animation on filter change
         >
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {filteredProjects.length > 0 ? (
-              filteredProjects.map((project) => (
+              filteredProjects.map((project, index) => (
                 <motion.div 
                   key={project.id}
                   className="project-card"
-                  variants={scaleUp}
-                  initial="hidden"
-                  animate="visible"
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3 }}
+                  {...animationConfig}
+                  variants={projectSlideIn}
+                  transition={{ 
+                    ...animationConfig.transition, 
+                    delay: index * 0.08 
+                  }}
                   whileHover={{ 
-                    y: -10,
-                    boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
+                    y: -12,
+                    scale: 1.02,
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+                    transition: { duration: 0.3 }
                   }}
                   layout
                 >
                   <motion.div 
                     className="project-image"
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    {...animationConfig}
+                    variants={projectFadeUp}
+                    whileHover={{ 
+                      scale: 1.05,
+                      transition: { duration: 0.3 }
+                    }}
                   >
                     <img src={project.img} alt={project.title} />
                     <motion.div 
                       className="project-links"
-                      // variants={fadeIn}
-                      transition={{ delay: 0.2 }}
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileHover={{ 
+                        opacity: 1, 
+                        scale: 1,
+                        transition: { duration: 0.2 }
+                      }}
                     >
                       <motion.a 
                         href={project.link} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.2 }}
+                        whileHover={{ 
+                          scale: 1.2,
+                          y: -2,
+                          color: 'var(--primary-color)',
+                          transition: { duration: 0.2 }
+                        }}
                         whileTap={{ scale: 0.9 }}
                       >
                         <FaExternalLinkAlt />
@@ -195,36 +243,73 @@ const Projects = () => {
                         href={project.github} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.2 }}
+                        whileHover={{ 
+                          scale: 1.2,
+                          y: -2,
+                          color: '#333',
+                          transition: { duration: 0.2 }
+                        }}
                         whileTap={{ scale: 0.9 }}
                       >
                         <FaGithub />
                       </motion.a>
                     </motion.div>
                   </motion.div>
-                  <div className="project-content">
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    <motion.div className="project-tags">
-                      {project.tags.map((tag) => (
+                  <motion.div 
+                    className="project-content"
+                    {...animationConfig}
+                    variants={projectFadeUp}
+                    transition={{ 
+                      ...animationConfig.transition, 
+                      delay: index * 0.08 + 0.1 
+                    }}
+                  >
+                    <motion.h3
+                      {...animationConfig}
+                      variants={projectFadeUp}
+                    >
+                      {project.title}
+                    </motion.h3>
+                    <motion.p
+                      {...animationConfig}
+                      variants={projectFadeUp}
+                    >
+                      {project.description}
+                    </motion.p>
+                    <motion.div 
+                      className="project-tags"
+                      {...animationConfig}
+                      variants={projectContainer}
+                    >
+                      {project.tags.map((tag, tagIndex) => (
                         <motion.span 
                           key={tag} 
                           className="tag"
-                          whileHover={{ scale: 1.1 }}
+                          {...animationConfig}
+                          variants={projectFadeUp}
+                          transition={{ 
+                            ...animationConfig.transition, 
+                            delay: index * 0.08 + 0.2 + tagIndex * 0.05 
+                          }}
+                          whileHover={{ 
+                            scale: 1.1,
+                            y: -2,
+                            backgroundColor: 'var(--primary-light)',
+                            transition: { duration: 0.2 }
+                          }}
                         >
                           {tag}
                         </motion.span>
                       ))}
                     </motion.div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))
             ) : (
               <motion.div 
                 className="no-projects"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                {...animationConfig}
+                variants={projectSlideIn}
               >
                 <p>No projects found matching your criteria</p>
               </motion.div>

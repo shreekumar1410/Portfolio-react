@@ -15,15 +15,27 @@ import Contact from '../Contact/Contact';
 import Footer from '../Footer/Footer';
 import EducationExperience from '../EducationExperience/EducationExperience';
 
-// Animation variants
+// Professional animation variants with smooth easing
 const sidebarVariants = {
   open: { 
     width: '250px',
-    transition: { duration: 0.3, ease: 'easeInOut' }
+    transition: { 
+      duration: 0.4, 
+      ease: [0.16, 1, 0.3, 1],
+      type: "spring",
+      stiffness: 120,
+      damping: 20
+    }
   },
   closed: { 
     width: '80px',
-    transition: { duration: 0.3, ease: 'easeInOut' }
+    transition: { 
+      duration: 0.4, 
+      ease: [0.16, 1, 0.3, 1],
+      type: "spring",
+      stiffness: 120,
+      damping: 20
+    }
   }
 };
 
@@ -31,12 +43,20 @@ const navItemVariants = {
   open: { 
     opacity: 1,
     x: 0,
-    transition: { duration: 0.2 }
+    scale: 1,
+    transition: { 
+      duration: 0.3,
+      ease: [0.16, 1, 0.3, 1]
+    }
   },
   closed: { 
-    opacity: 1, // Changed to keep icons visible
+    opacity: 1,
     x: 0,
-    transition: { duration: 0.1 }
+    scale: 1,
+    transition: { 
+      duration: 0.2,
+      ease: [0.16, 1, 0.3, 1]
+    }
   }
 };
 
@@ -45,8 +65,9 @@ const mobileMenuVariants = {
     height: 'auto',
     opacity: 1,
     transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.08,
       when: "beforeChildren"
     }
   },
@@ -55,7 +76,8 @@ const mobileMenuVariants = {
     opacity: 0,
     transition: {
       duration: 0.3,
-      staggerChildren: 0.1,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.05,
       staggerDirection: -1,
       when: "afterChildren"
     }
@@ -66,12 +88,53 @@ const mobileItemVariants = {
   open: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.2 }
+    scale: 1,
+    transition: { 
+      duration: 0.3,
+      ease: [0.16, 1, 0.3, 1]
+    }
   },
   closed: {
-    y: -10,
+    y: -15,
     opacity: 0,
-    transition: { duration: 0.1 }
+    scale: 0.95,
+    transition: { 
+      duration: 0.2,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
+// Smooth theme toggle animation
+const themeToggleVariants = {
+  initial: { 
+    y: -20, 
+    opacity: 0, 
+    scale: 0.8,
+    rotate: -180
+  },
+  animate: { 
+    y: 0, 
+    opacity: 1, 
+    scale: 1,
+    rotate: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1],
+      type: "spring",
+      stiffness: 200,
+      damping: 20
+    }
+  },
+  exit: { 
+    y: 20, 
+    opacity: 0, 
+    scale: 0.8,
+    rotate: 180,
+    transition: {
+      duration: 0.3,
+      ease: [0.16, 1, 0.3, 1]
+    }
   }
 };
 
@@ -145,36 +208,62 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
         >
           <nav className="sidebar-nav">
             <ul>
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <motion.li 
                   key={item.name}
                   variants={navItemVariants}
                   animate={isOpen ? 'open' : 'closed'}
+                  transition={{ 
+                    delay: isOpen ? index * 0.05 : 0
+                  }}
                 >
-                  <a 
+                  <motion.a 
                     href={item.href} 
                     className={`nav-link ${activeSection === item.section ? 'active' : ''}`}
                     onClick={closeMobileMenu}
                     data-tooltip-id="sidebar-tooltip"
                     data-tooltip-content={item.name}
                     data-tooltip-place="right"
+                    whileHover={{ 
+                      scale: 1.05,
+                      x: 5,
+                      transition: { 
+                        duration: 0.2,
+                        ease: [0.16, 1, 0.3, 1]
+                      }
+                    }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <FontAwesomeIcon 
                       icon={item.icon} 
                       className="nav-icon" 
                       style={{ fontSize: isOpen ? '1rem' : '1.2rem' }}
                     />
-                    {isOpen && (
-                      <motion.span 
-                        className="nav-text"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.1 }}
-                      >
-                        {item.name}
-                      </motion.span>
-                    )}
-                  </a>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.span 
+                          className="nav-text"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ 
+                            opacity: 1, 
+                            x: 0,
+                            transition: { 
+                              delay: 0.15,
+                              duration: 0.3,
+                              ease: [0.16, 1, 0.3, 1]
+                            }
+                          }}
+                          exit={{ 
+                            opacity: 0, 
+                            x: -10,
+                            transition: { duration: 0.2 }
+                          }}
+                        >
+                          {item.name}
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </motion.a>
                 </motion.li>
               ))}
             </ul>
@@ -188,30 +277,50 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
               onClick={toggleDarkMode}
               className="theme-toggle-btn"
               aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ 
+                scale: 1.1,
+                transition: { 
+                  duration: 0.2,
+                  ease: [0.16, 1, 0.3, 1]
+                }
+              }}
               whileTap={{ scale: 0.9 }}
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
                   key={darkMode ? 'dark' : 'light'}
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 20, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  variants={themeToggleVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
                 >
                   <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
                 </motion.span>
               </AnimatePresence>
-              {isOpen && (
-                <motion.span 
-                  className="theme-toggle-text"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  {darkMode ? 'Light Mode' : 'Dark Mode'}
-                </motion.span>
-              )}
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.span 
+                    className="theme-toggle-text"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ 
+                      opacity: 1, 
+                      x: 0,
+                      transition: { 
+                        delay: 0.15,
+                        duration: 0.3,
+                        ease: [0.16, 1, 0.3, 1]
+                      }
+                    }}
+                    exit={{ 
+                      opacity: 0, 
+                      x: -10,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    {darkMode ? 'Light Mode' : 'Dark Mode'}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </motion.button>
           </motion.div>
           
@@ -229,9 +338,15 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
       {isMobile && (
         <motion.header 
           className="mobile-navbar"
-          initial={{ y: -50 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ 
+            y: 0, 
+            opacity: 1,
+            transition: {
+              duration: 0.4,
+              ease: [0.16, 1, 0.3, 1]
+            }
+          }}
         >
           <div className="mobile-nav-name">Shree Kumar</div>
           <div className="mobile-nav-controls">
@@ -239,17 +354,53 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
               onClick={toggleDarkMode} 
               className="theme-toggle-btn"
               aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
+              whileHover={{ 
+                scale: 1.1,
+                rotate: 15,
+                transition: { duration: 0.2 }
+              }}
               whileTap={{ scale: 0.9 }}
             >
-              <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={darkMode ? 'dark' : 'light'}
+                  variants={themeToggleVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                >
+                  <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+                </motion.span>
+              </AnimatePresence>
             </motion.button>
             <motion.button 
               onClick={toggleMobileMenu} 
               className="mobile-menu-btn"
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <FontAwesomeIcon icon={mobileMenuOpen ? faTimes : faBars} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={mobileMenuOpen ? 'close' : 'open'}
+                  initial={{ rotate: -180, opacity: 0 }}
+                  animate={{ 
+                    rotate: 0, 
+                    opacity: 1,
+                    transition: {
+                      duration: 0.3,
+                      ease: [0.16, 1, 0.3, 1]
+                    }
+                  }}
+                  exit={{ 
+                    rotate: 180, 
+                    opacity: 0,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <FontAwesomeIcon icon={mobileMenuOpen ? faTimes : faBars} />
+                </motion.span>
+              </AnimatePresence>
             </motion.button>
           </div>
           <AnimatePresence>
@@ -267,14 +418,20 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                       key={item.name}
                       variants={mobileItemVariants}
                     >
-                      <a 
+                      <motion.a 
                         href={item.href} 
                         className={`mobile-nav-link ${activeSection === item.section ? 'active' : ''}`}
                         onClick={closeMobileMenu}
+                        whileHover={{ 
+                          scale: 1.05,
+                          x: 5,
+                          transition: { duration: 0.2 }
+                        }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <FontAwesomeIcon icon={item.icon} className="mobile-nav-icon" />
                         <span>{item.name}</span>
-                      </a>
+                      </motion.a>
                     </motion.li>
                   ))}
                 </ul>
