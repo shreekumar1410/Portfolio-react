@@ -8,7 +8,7 @@
   height: 100vh;
   background-color: var(--sidebar-bg);
   color: var(--sidebar-text);
-  transition: transform 0.3s ease, width 0.3s ease;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
   z-index: 1000;
   box-shadow: var(--box-shadow);
   display: flex;
@@ -24,12 +24,9 @@
   width: var(--sidebar-closed-width);
 }
 
-/* .sidebar.closed {
-  transform: translateX(calc(var(--sidebar-closed-width) - var(--sidebar-width)));
-} */
-
+/* Remove problematic transform that causes overlay */
 .sidebar.closed:hover {
-  transform: translateX(0);
+  /* Removed transform: translateX(0) to prevent overlay effect */
   box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -116,7 +113,7 @@
 
 .sidebar-nav {
   flex: 1;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .sidebar-nav ul {
@@ -135,15 +132,17 @@
   padding: var(--space-md);
   color: var(--sidebar-text);
   text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease; 
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease; 
   white-space: nowrap;
   margin: 0 var(--space-sm);
   border-radius: var(--border-radius-sm);
+  position: relative;
 }
 
 .nav-link:hover {
   background-color: var(--hover-overlay);
   color: var(--primary-color);
+  transform: translateX(2px);
 }
 
 .nav-icon {
@@ -282,7 +281,8 @@
 .main-content {
   margin-left: var(--sidebar-width);
   width: calc(100% - var(--sidebar-width));
-  transition: var(--transition);
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  position: relative;
 }
 
 .sidebar.closed ~ .main-content {
