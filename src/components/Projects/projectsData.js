@@ -6,7 +6,7 @@ const projectsData = [
   {
     id: 1,
     title: "IOT BASED SMART IRRIGATION WITH WEED DETECTION USING ML",
-    description: "Redesign ITIC's company profile to effectively showcase its services in the environmental, healthcare, and warehousing sectors, ensuring comprehensive representation for diverse target audiences.",
+    description: "This project automates soil and crop management using sensors and AI. It analyzes soil moisture levels and controls irrigation automatically. With the YOLOv8 algorithm, it detects unwanted plants in the field through image recognition. The system also provides real-time weather updates to help farmers make better decisions for healthy crop growth.",
     img: Smart,
     link: "#",
     github: "https://github.com/shreekumar1410/smart__irrigation",
@@ -17,7 +17,7 @@ const projectsData = [
   {
     id: 2,
     title: "ODIR: SEEING THE BIG PICTURE FOR EYE HEALTH",
-    description: "Redesign Al Khudair International's company profile to effectively showcase its expertise in residential, commercial, and industrial projects.",
+    description: "This project uses AI and deep learning to analyze eye images and automatically detect diseases like diabetic retinopathy, glaucoma, cataracts, and more. It helps in early diagnosis and supports doctors in making faster, more accurate treatment decisions—improving patient care and reducing workload in eye healthcare.",
     img: ODIR,
     link: "#",
     github: "https://github.com/shreekumar1410/PBL-NT-GP-8511-1683280726",
@@ -28,7 +28,7 @@ const projectsData = [
   {
     id: 3,
     title: "ANIMAL SPECIES DETECTION",
-    description: "Design branding for Leia Activewear, targeting women with a mission to empower them through high-quality activewear.",
+    description: "This project uses computer vision and deep learning techniques to identify animal species from images. By training a model on labeled animal images, it can accurately predict the species in new, unseen photos. Techniques like data augmentation and transfer learning are used to improve accuracy. This can help in wildlife monitoring, pest detection, and conservation efforts.",
     img: Animal,
     link: "#",
     github: "https://github.com/shreekumar1410/animal_prediction",
