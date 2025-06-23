@@ -10,6 +10,11 @@
   --mobile-nav-height: 60px;
   --header-height: 4rem;
   
+  /* Mobile-specific variables */
+  --mobile-padding: 1rem;
+  --mobile-section-padding: 2.5rem 0;
+  --mobile-container-width: 95%;
+  
   /* ================ */
   /* Color System     */
   /* ================ */

@@ -152,20 +152,65 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .tab-switcher {
+    gap: 0.8rem;
+  }
+  
+  .tab-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
   .timeline {
-    padding-left: 3rem;
+    padding-left: 3.5rem;
   }
   
   .timeline::before {
-    left: 1.75rem;
+    left: 2rem;
   }
   
   .timeline-icon {
-    left: -3rem;
+    left: -3.5rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+  
+  .tab-switcher {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tab-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .timeline {
+    padding-left: 2.5rem;
+  }
+  
+  .timeline::before {
+    left: 1.5rem;
+  }
+  
+  .timeline-icon {
+    left: -2.5rem;
     width: 2.5rem;
     height: 2.5rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   
   .timeline-header {
@@ -174,7 +219,70 @@
     gap: 0.5rem;
   }
   
+  .timeline-content {
+    padding: 1.5rem;
+  }
+  
   .period {
     align-self: flex-start;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .section {
+    padding: 2.5rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .timeline {
+    padding-left: 2rem;
+  }
+  
+  .timeline::before {
+    left: 1.25rem;
+  }
+  
+  .timeline-icon {
+    left: -2rem;
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.9rem;
+  }
+  
+  .timeline-content {
+    padding: 1.2rem;
+  }
+  
+  .timeline-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .timeline-content h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .period {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.8rem;
+  }
+  
+  .details-list {
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .details-list li {
+    margin-bottom: 0.4rem;
   }
 }

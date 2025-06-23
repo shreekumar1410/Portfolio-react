@@ -114,9 +114,10 @@
 .sidebar-nav {
   flex: 1;
   overflow: hidden;
+  padding: var(--space-sm) 0;
 }
 
-.sidebar-nav ul {
+.sidebar-nav li {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -176,7 +177,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--header-text);
+  color: var(--sidebar-text);
   cursor: pointer;
   font-size: var(--sidebar-icon-size);
   transition: transform 0.1s ease;
@@ -202,7 +203,7 @@
   left: 0;
   width: 100%;
   height: var(--mobile-nav-height);
-  background-color: var(--header-bg);
+  background-color: var(--sidebar-bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -213,7 +214,7 @@
 }
 
 .mobile-nav-name {
-  color: var(--header-text);
+  color: var(--sidebar-text);
   font-weight: bold;
   font-size: 1.2rem;
   padding: 0 20px;
@@ -228,7 +229,7 @@
 .mobile-menu-btn {
   background: none;
   border: none;
-  color: var(--header-text);
+  color: var(--sidebar-text);
   font-size: 1.5rem;
   cursor: pointer;
   padding: var(--space-sm);
@@ -245,7 +246,7 @@
   top: var(--mobile-nav-height);
   left: 0;
   width: 100%;
-  background-color: var(--header-bg);
+  background-color: var(--sidebar-bg);
   box-shadow: var(--box-shadow-lg);
   z-index: 999;
 }
@@ -260,7 +261,7 @@
   display: flex;
   align-items: center;
   padding: var(--space-md);
-  color: var(--header-text);
+  color: var(--sidebar-text);
   text-decoration: none;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
