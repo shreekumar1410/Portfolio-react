@@ -356,7 +356,6 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
               aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
               whileHover={{ 
                 scale: 1.1,
-                rotate: 15,
                 transition: { duration: 0.2 }
               }}
               whileTap={{ scale: 0.9 }}

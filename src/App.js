@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import SidebarNav from './components/SidebarNav/SidebarNav';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import './assets/styles/App.css';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         className={`App ${darkMode ? 'dark' : ''}`}
       >
         <SidebarNav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <ScrollToTop darkMode={darkMode} />
       </motion.div>
     </AnimatePresence>
   );

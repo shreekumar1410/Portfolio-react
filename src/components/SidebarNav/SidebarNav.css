@@ -177,7 +177,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--sidebar-text);
+  color: var(--header-text);
   cursor: pointer;
   font-size: var(--sidebar-icon-size);
   transition: transform 0.1s ease;
