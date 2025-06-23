@@ -226,7 +226,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                     data-tooltip-place="right"
                     whileHover={{ 
                       scale: 1.05,
-                      x: 5,
+                      x: 0,
                       transition: { 
                         duration: 0.2,
                         ease: [0.16, 1, 0.3, 1]
