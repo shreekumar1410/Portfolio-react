@@ -1,1 +1,0 @@
-want to implement the animation gif video on home page (like, a boy jump down and click the next button to change the role of mine)
