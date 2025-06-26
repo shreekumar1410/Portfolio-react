@@ -180,13 +180,16 @@ const Projects = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div 
-          className="projects-grid"
-          {...animationConfig}
-          variants={projectContainer}
-          key={filter} // Re-trigger animation on filter change
-        >
-          <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait">
+          <motion.div 
+            className="projects-grid"
+            {...animationConfig}
+            variants={projectContainer}
+            key={filter} // Re-trigger animation on filter change
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project, index) => (
                 <motion.div 
@@ -314,8 +317,8 @@ const Projects = () => {
                 <p>No projects found matching your criteria</p>
               </motion.div>
             )}
-          </AnimatePresence>
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </motion.section>
   );

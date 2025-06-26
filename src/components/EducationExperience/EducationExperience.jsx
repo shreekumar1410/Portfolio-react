@@ -123,86 +123,94 @@ const EducationExperience = () => {
           {...animationConfig}
           variants={professionalContainer}
         >
-          <AnimatePresence mode="wait">
-            {(activeTab === 'education' ? educationData : experienceData).map((item, index) => (
-              <motion.div 
-                key={item.id} 
-                className={`timeline-item ${activeTab}`}
-                {...animationConfig}
-                variants={professionalSlideIn}
-                transition={{ 
-                  ...animationConfig.transition, 
-                  delay: index * 0.1 
-                }}
-                whileHover={{ 
-                  y: -8,
-                  scale: 1.02,
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-                  transition: { duration: 0.3 }
-                }}
-              >
+          <AnimatePresence>
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {(activeTab === 'education' ? educationData : experienceData).map((item, index) => (
                 <motion.div 
-                  className="timeline-icon"
-                  {...animationConfig}
-                  variants={professionalSlideIn}
-                  whileHover={{ 
-                    scale: 1.15,
-                    rotate: 5,
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  {item.icon}
-                </motion.div>
-                <motion.div 
-                  className="timeline-content"
+                  key={item.id} 
+                  className={`timeline-item ${activeTab}`}
                   {...animationConfig}
                   variants={professionalSlideIn}
                   transition={{ 
                     ...animationConfig.transition, 
-                    delay: index * 0.1 + 0.1 
+                    delay: index * 0.1 
+                  }}
+                  whileHover={{ 
+                    y: -8,
+                    scale: 1.02,
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                    transition: { duration: 0.3 }
                   }}
                 >
                   <motion.div 
-                    className="timeline-header"
+                    className="timeline-icon"
                     {...animationConfig}
                     variants={professionalSlideIn}
+                    whileHover={{ 
+                      scale: 1.15,
+                      rotate: 5,
+                      transition: { duration: 0.2 }
+                    }}
                   >
-                    <h3>{activeTab === 'education' ? item.degree : item.role}</h3>
-                    <span className="period">{item.period}</span>
+                    {item.icon}
                   </motion.div>
-                  <motion.h4
+                  <motion.div 
+                    className="timeline-content"
                     {...animationConfig}
                     variants={professionalSlideIn}
+                    transition={{ 
+                      ...animationConfig.transition, 
+                      delay: index * 0.1 + 0.1 
+                    }}
                   >
-                    {activeTab === 'education' ? item.institution : item.company}
-                  </motion.h4>
-                  <motion.ul 
-                    className="details-list"
-                    {...animationConfig}
-                    variants={professionalContainer}
-                  >
-                    {item.details.map((detail, i) => (
-                      <motion.li 
-                        key={i}
-                        {...animationConfig}
-                        variants={professionalSlideIn}
-                        transition={{ 
-                          ...animationConfig.transition, 
-                          delay: index * 0.1 + 0.2 + i * 0.05 
-                        }}
-                        whileHover={{
-                          x: 5,
-                          color: "#007bff",
-                          transition: { duration: 0.2 }
-                        }}
-                      >
-                        {detail}
-                      </motion.li>
-                    ))}
-                  </motion.ul>
+                    <motion.div 
+                      className="timeline-header"
+                      {...animationConfig}
+                      variants={professionalSlideIn}
+                    >
+                      <h3>{activeTab === 'education' ? item.degree : item.role}</h3>
+                      <span className="period">{item.period}</span>
+                    </motion.div>
+                    <motion.h4
+                      {...animationConfig}
+                      variants={professionalSlideIn}
+                    >
+                      {activeTab === 'education' ? item.institution : item.company}
+                    </motion.h4>
+                    <motion.ul 
+                      className="details-list"
+                      {...animationConfig}
+                      variants={professionalContainer}
+                    >
+                      {item.details.map((detail, i) => (
+                        <motion.li 
+                          key={i}
+                          {...animationConfig}
+                          variants={professionalSlideIn}
+                          transition={{ 
+                            ...animationConfig.transition, 
+                            delay: index * 0.1 + 0.2 + i * 0.05 
+                          }}
+                          whileHover={{
+                            x: 5,
+                            color: "#007bff",
+                            transition: { duration: 0.2 }
+                          }}
+                        >
+                          {detail}
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              ))}
+            </motion.div>
           </AnimatePresence>
         </motion.div>
       </div>

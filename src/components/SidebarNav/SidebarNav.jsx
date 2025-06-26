@@ -148,14 +148,33 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = isMobile ? 60 : 0; // Mobile header height is 60px
-      const elementPosition = element.offsetTop;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      // Use window.innerWidth for more accurate mobile detection
+      const isMobileView = window.innerWidth < 768;
+      
+      if (isMobileView) {
+        // For mobile: calculate offset more precisely
+        const elementRect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const elementTop = elementRect.top + scrollTop;
+        
+        // Get actual mobile header height
+        const mobileHeader = document.querySelector('.mobile-navbar');
+        const headerHeight = mobileHeader ? mobileHeader.offsetHeight + 10 : 70; // Add 10px padding
+        
+        const targetPosition = elementTop - headerHeight;
+        
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: 'smooth'
+        });
+      } else {
+        // For desktop: use simple scroll
+        const elementPosition = element.offsetTop;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
+      }
     }
     closeMobileMenu();
   };
