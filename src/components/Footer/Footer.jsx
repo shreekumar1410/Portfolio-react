@@ -19,6 +19,22 @@ const animationConfig = {
 };
 
 const Footer = () => {
+  // Custom scroll function that accounts for mobile header height
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const isMobile = window.innerWidth < 768;
+      const headerOffset = isMobile ? 60 : 0; // Mobile header height is 60px
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const socialLinks = [
     {
       id: 1,
@@ -115,9 +131,20 @@ const Footer = () => {
                     transition: { duration: 0.2 }
                   }}
                 >
-                  <a href={`#${link}`}>
+                  <button 
+                    onClick={() => scrollToSection(link)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: 'inherit',
+                      cursor: 'pointer',
+                      fontSize: 'inherit',
+                      fontFamily: 'inherit',
+                      textDecoration: 'none'
+                    }}
+                  >
                     {link.charAt(0).toUpperCase() + link.slice(1)}
-                  </a>
+                  </button>
                 </motion.li>
               ))}
             </motion.ul>

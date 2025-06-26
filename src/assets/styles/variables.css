@@ -22,6 +22,7 @@
   --primary-color: #3498db;
   --primary-dark: #2980b9;
   --primary-light: #5dade2;
+  --primary-transparent: rgba(52, 152, 219, 0.1);
   
   /* Secondary Colors */
   --secondary-color: #2c3e50;

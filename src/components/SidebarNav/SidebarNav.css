@@ -138,6 +138,12 @@
   margin: 0 var(--space-sm);
   border-radius: var(--border-radius-sm);
   position: relative;
+  background: none;
+  border: none;
+  width: calc(100% - var(--space-md));
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .nav-link:hover {
@@ -264,6 +270,12 @@
   color: var(--sidebar-text);
   text-decoration: none;
   transition: color 0.2s ease, background-color 0.2s ease;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .mobile-nav-link:hover {
@@ -339,6 +351,8 @@
   padding: 60px 20px;
   /* color: var(--text-color); */
   background-color: var(--bg-color); /* default */
+  /* Add scroll padding for mobile to account for fixed header */
+  scroll-margin-top: 70px;
 }
 
 /* Alternate background for even sections */

@@ -144,6 +144,22 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
+  // Custom scroll function that accounts for mobile header height
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = isMobile ? 60 : 0; // Mobile header height is 60px
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    closeMobileMenu();
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -152,7 +168,8 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
 
     const handleScroll = () => {
       const sections = ['home', 'about', 'education', 'technologies', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      const headerOffset = isMobile ? 100 : 100; // Adjust for better section detection
+      const scrollPosition = window.scrollY + headerOffset;
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -176,15 +193,15 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
   const navItems = [
-    { name: 'Home', icon: faHome, href: '#home', section: 'home' },
-    { name: 'About', icon: faUser, href: '#about', section: 'about' },
-    { name: 'Education', icon: faGraduationCap, href: '#education', section: 'education' },
-    { name: 'Technologies', icon: faCode, href: '#technologies', section: 'technologies' },
-    { name: 'Projects', icon: faProjectDiagram, href: '#projects', section: 'projects' },
-    { name: 'Contact', icon: faEnvelope, href: '#contact', section: 'contact' }
+    { name: 'Home', icon: faHome, section: 'home' },
+    { name: 'About', icon: faUser, section: 'about' },
+    { name: 'Education', icon: faGraduationCap, section: 'education' },
+    { name: 'Technologies', icon: faCode, section: 'technologies' },
+    { name: 'Projects', icon: faProjectDiagram, section: 'projects' },
+    { name: 'Contact', icon: faEnvelope, section: 'contact' }
   ];
 
   const handleSidebarHover = (hoverState) => {
@@ -217,10 +234,9 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                     delay: isOpen ? index * 0.05 : 0
                   }}
                 >
-                  <motion.a 
-                    href={item.href} 
+                  <motion.button 
+                    onClick={() => scrollToSection(item.section)}
                     className={`nav-link ${activeSection === item.section ? 'active' : ''}`}
-                    onClick={closeMobileMenu}
                     data-tooltip-id="sidebar-tooltip"
                     data-tooltip-content={item.name}
                     data-tooltip-place="right"
@@ -263,7 +279,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                         </motion.span>
                       )}
                     </AnimatePresence>
-                  </motion.a>
+                  </motion.button>
                 </motion.li>
               ))}
             </ul>
@@ -417,10 +433,9 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                       key={item.name}
                       variants={mobileItemVariants}
                     >
-                      <motion.a 
-                        href={item.href} 
+                      <motion.button 
+                        onClick={() => scrollToSection(item.section)}
                         className={`mobile-nav-link ${activeSection === item.section ? 'active' : ''}`}
-                        onClick={closeMobileMenu}
                         whileHover={{ 
                           scale: 1.05,
                           x: 5,
@@ -430,7 +445,7 @@ const SidebarNav = ({ darkMode, toggleDarkMode }) => {
                       >
                         <FontAwesomeIcon icon={item.icon} className="mobile-nav-icon" />
                         <span>{item.name}</span>
-                      </motion.a>
+                      </motion.button>
                     </motion.li>
                   ))}
                 </ul>
