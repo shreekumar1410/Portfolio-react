@@ -45,9 +45,9 @@ function App() {
     <ThemeProvider>
       <div className="App">
         <AnimatePresence mode="wait">
-          {/* {isLoading ? (
+          {isLoading ? (
             <Loading key="loading" />
-          ) :  */(
+          ) : (
             <div key="main-content">
               <Header />
               <main>
