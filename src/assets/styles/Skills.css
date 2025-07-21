@@ -1,0 +1,236 @@
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .skills-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px var(--shadow-light);
+      border: 1px solid var(--border-color);
+      height: 100%;
+    }
+
+    .skills-card-title {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon-wrapper {
+      font-size: 1.3rem;
+    }
+
+    .technical-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .technical-skill-item {
+      background: var(--bg-secondary);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 500;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .technical-skill-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--skill-color);
+      opacity: 0.8;
+    }
+
+    .technical-skill-item:hover {
+      background: var(--primary-light);
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px var(--shadow-medium);
+    }
+
+    [data-theme="dark"] .technical-skill-item:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .soft-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .soft-skill-item {
+      background: var(--bg-secondary);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 500;
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .soft-skill-item:hover {
+      background: var(--primary-light);
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    [data-theme="dark"] .soft-skill-item:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .technologies-section {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: 0 10px 30px var(--shadow-light);
+      border: 1px solid var(--border-color);
+    }
+
+    .technologies-title {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tech-filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tech-filter-btn {
+      padding: 0.8rem 2rem;
+      border: 2px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .tech-filter-btn:hover,
+    .tech-filter-btn.active {
+      border-color: var(--primary-color);
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+    }
+
+    .technologies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      justify-items: center;
+    }
+
+    .tech-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem;
+      border-radius: 15px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      min-width: 125px;
+    }
+
+    .tech-item:hover {
+      background: var(--bg-tertiary);
+      box-shadow: 0 5px 20px var(--shadow-medium);
+    }
+
+    .tech-icon {
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .tech-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2.5rem;
+      }
+
+      .skills-card {
+        padding: 2rem;
+      }
+
+      .technologies-section {
+        padding: 2rem;
+      }
+
+      .technologies-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .soft-skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .technical-skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tech-filter-container {
+        gap: 0.5rem;
+      }
+
+      .tech-filter-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .technologies-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .tech-item {
+        padding: 1rem;
+      }
+
+      .tech-filter-container {
+        gap: 0.3rem;
+      }
+
+      .tech-filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+      }
+    }

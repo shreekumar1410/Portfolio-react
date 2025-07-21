@@ -1,0 +1,103 @@
+    .typing-cursor {
+      animation: blink 1s infinite;
+      color: var(--primary-color);
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .hero-decorations {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .decoration {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .hero-decoration-0 {
+      width: 100px;
+      height: 100px;
+      top: 25%;
+      left: 20%;
+      background: linear-gradient(135deg, 
+        var(--decoration-primary),
+        var(--decoration-secondary)
+      );
+      box-shadow: 0 0 25px var(--decoration-primary);
+    }
+
+    .hero-decoration-1 {
+      width: 100px;
+      height: 100px;
+      top: 75%;
+      left: 10%;
+      background: linear-gradient(45deg, 
+        var(--decoration-accent),
+        var(--decoration-accent-alt)
+      );
+      box-shadow: 0 0 20px var(--decoration-accent);
+    }
+
+    .hero-decoration-2 {
+      width: 150px;
+      height: 150px;
+      top: 60%;
+      right: 10%;
+      background: linear-gradient(225deg, 
+        var(--decoration-secondary),
+        var(--decoration-primary-alt)
+      );
+      box-shadow: 0 0 30px var(--decoration-secondary);
+    }
+
+    .hero-decoration-3 {
+      width: 80px;
+      height: 80px;
+      top: 30%;
+      right: 20%;
+      background: linear-gradient(315deg, 
+        var(--decoration-accent),
+        var(--decoration-secondary-alt)
+      );
+      box-shadow: 0 0 18px var(--decoration-accent);
+    }
+
+    .hero-description {
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      color: #87F;
+    }
+
+    [data-theme="dark"] .hero-title {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .decoration {
+        display: none;
+      }
+      
+      .hero-cta {
+        flex-direction: column !important;
+      }
+      
+      .btn-primary-custom,
+      .btn-outline-custom {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+    }
