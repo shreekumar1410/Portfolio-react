@@ -12,7 +12,7 @@ const Hero = () => {
   
   const roles = [
     'Frontend Developer',
-    'Software Developer',
+    'Software Engineer',
     'Web Developer'
   ];
 
@@ -53,8 +53,8 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [currentRole]);
 
-  const handleScrollToAbout = () => {
-    const aboutSection = document.getElementById('about');
+  const handleScrollToProjects = () => {
+    const aboutSection = document.getElementById('projects');
     if (aboutSection) {
       aboutSection.scrollIntoView({ behavior: 'smooth' });
     }
@@ -125,7 +125,7 @@ const Hero = () => {
               >
                 <button
                   className="btn-primary-custom d-flex align-items-center gap-2"
-                  onClick={handleScrollToAbout}
+                  onClick={handleScrollToProjects}
                 >
                   View My Work
                   <BsArrowDown />

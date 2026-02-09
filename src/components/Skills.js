@@ -1,56 +1,20 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { 
-  SiC, SiFlask, SiMysql
+import {
+  SiC, SiFlask, SiMysql, SiSpringboot, SiOracle
 } from 'react-icons/si';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython } from 'react-icons/fa';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython, FaJava, FaAngular } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../assets/styles/Skills.css'
+
+import { technicalSkills, technologies, techCategories, softSkills } from '../data/skillsData';
 
 const Skills = () => {
   const [techFilter, setTechFilter] = useState('all');
 
-  const technicalSkills = [
-    { name: 'HTML5', color: '#E34F26' },
-    { name: 'CSS3', color: '#1572B6' },
-    { name: 'JavaScript', color: '#F7DF1E' },
-    { name: 'React', color: '#61DAFB' },
-    { name: 'Python', color: '#3776AB' },
-    { name: 'C', color: '#A8B9CC' },
-    { name: 'Flask', color: '#000000' },
-    { name: 'SQL', color: '#4479A1' }
-  ];
-
-  const technologies = [
-    { id: 1, name: 'HTML5', icon: <FaHtml5 size={60} />, color: '#E34F26', category: 'frontend' },
-    { id: 2, name: 'CSS3', icon: <FaCss3Alt size={60} />, color: '#1572B6', category: 'frontend' },
-    { id: 3, name: 'JavaScript', icon: <FaJs size={60} />, color: '#F7DF1E', category: 'frontend' },
-    { id: 4, name: 'React', icon: <FaReact size={60} />, color: '#61DAFB', category: 'frontend' },
-    { id: 5, name: 'Python', icon: <FaPython size={60} />, color: '#3776AB', category: 'backend' },
-    { id: 6, name: 'C', icon: <SiC size={60} />, color: '#A8B9CC', category: 'backend' },
-    { id: 7, name: 'Flask', icon: <SiFlask size={60} />, color: '#000000', category: 'backend' },
-    { id: 8, name: 'SQL', icon: <SiMysql size={60} />, color: '#4479A1', category: 'database' }
-  ];
-
-  const techCategories = [
-    { key: 'all', label: 'All Technologies' },
-    { key: 'frontend', label: 'Frontend' },
-    { key: 'backend', label: 'Backend' },
-    { key: 'database', label: 'Database' }
-  ];
-
-  const filteredTechnologies = techFilter === 'all' 
-    ? technologies 
+  const filteredTechnologies = techFilter === 'all'
+    ? technologies
     : technologies.filter(tech => tech.category === techFilter);
-
-  const softSkills = [
-    'Problem Solving',
-    'Team Collaboration',
-    'Communication',
-    'Adaptability',
-    'Critical Thinking',
-    'Continuous Learning'
-  ];
 
 
 
@@ -83,7 +47,7 @@ const Skills = () => {
       <Container>
         <motion.div
           variants={containerVariants}
-          initial="hidden"  
+          initial="hidden"
           whileInView="visible"
           viewport={{ once: true, threshold: 0.2 }}
         >
@@ -100,7 +64,7 @@ const Skills = () => {
 
           {/* Technical Skills */}
           <Row className="mb-5">
-            <Col lg={6} className="mb-4 mb-lg-0">
+            {/* <Col lg={6} className="mb-4 mb-lg-0">
               <motion.div variants={itemVariants} className="skills-card">
                 <h3 className="skills-card-title mb-4">
                   <span className="icon-wrapper me-3">⚡</span>
@@ -121,9 +85,9 @@ const Skills = () => {
                   ))}
                 </div>
               </motion.div>
-            </Col>
+            </Col> */}
 
-            <Col lg={6}>
+            <Col>
               <motion.div variants={itemVariants} className="skills-card">
                 <h3 className="skills-card-title mb-4">
                   <span className="icon-wrapper me-3">🎯</span>
@@ -154,7 +118,7 @@ const Skills = () => {
                   <span className="icon-wrapper me-3">🛠️</span>
                   Technologies & Tools
                 </h3>
-                
+
                 {/* Technology Filter Buttons */}
                 <div className="tech-filter-container mb-5">
                   {techCategories.map((category) => (
@@ -182,15 +146,15 @@ const Skills = () => {
                           duration: 0.3,
                           delay: index * 0.05
                         }}
-                        whileHover={{ 
-                          scale: 1.1, 
+                        whileHover={{
+                          scale: 1.1,
                           y: -5,
                           transition: { duration: 0.2 }
                         }}
                         whileTap={{ scale: 0.95 }}
                         layout
                       >
-                        <div 
+                        <div
                           className="tech-icon"
                           style={{ color: tech.color }}
                         >
@@ -207,7 +171,7 @@ const Skills = () => {
         </motion.div>
       </Container>
 
-      
+
     </section>
   );
 };

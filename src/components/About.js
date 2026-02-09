@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import '../assets/styles/About.css'
 import professionalPhoto from '../assets/image/My_New_Photo.png';
+import professionalPhoto2 from '../assets/image/About_page.png';
 
 const About = () => {
   const containerVariants = {
@@ -51,28 +52,25 @@ const About = () => {
           <Row className="align-items-center mb-5">
             <Col lg={6} className="mb-4 mb-lg-0">
               <motion.div variants={itemVariants} className="about-content">
-                <h3 className="mb-4">Hello! I'm a Frontend Developer</h3>
+                <h3 className="mb-4">Hello! I'm a Software Engineer (Full Stack – Java & Angular)</h3>
                 <p className="mb-4">
-                  A creative Frontend & Web Developer from Chennai, passionate about 
-                  building interactive, user-friendly websites and applications. With a degree in 
-                  Information Technology and expertise in HTML, CSS, JavaScript, Python, SQL, and React, 
-                  I love turning ideas into functional and visually appealing digital experiences.
+                  I’m a passionate developer from Chennai, currently working at Inspirisys Solutions, where I build and enhance enterprise applications using Java Spring Boot and Angular. With a strong foundation in Frontend Development (HTML, CSS, JavaScript, React) and growing expertise in backend systems, I enjoy creating clean, efficient, and scalable solutions.
                 </p>
                 <p className="mb-4">
-                  As a fresher, I bring fresh perspectives, a problem-solving mindset, and a hunger to 
-                  learn and grow in the ever-evolving world of web development. Whether it's debugging 
-                  code, optimizing performance, or crafting responsive designs, I thrive on challenges 
-                  that push me to innovate.
+                  I started my career as a fresher with a deep interest in building user-friendly, responsive interfaces — and now, as a full-time Software Engineer, I’m expanding that skill into full-stack development, backend architecture, and real-world software engineering practices.
+                </p>
+                <p className="mb-4">
+                  Every day, I work on improving application performance, fixing bugs, integrating APIs, and contributing to production-ready features under real project workflows.
                 </p>
                 <div className="about-highlights">
                   <div className="highlight-item">
-                    <strong>🎯 Focus:</strong> Focusing on user-friendly web development.
+                    <strong>🎯 Focus:</strong> Full Stack Development (Java Spring Boot + Angular)
                   </div>
                   <div className="highlight-item">
-                    <strong>💡 Philosophy:</strong> Clean code, beautiful design.
+                    <strong>💡 Philosophy:</strong> Clean code, scalable systems.
                   </div>
                   <div className="highlight-item">
-                    <strong>🚀 Goal:</strong> Continuous learning and growth in Tech.
+                    <strong>🚀 Goal:</strong> To grow into a well-rounded full-stack engineer and build impactful products
                   </div>
                 </div>
               </motion.div>
@@ -82,9 +80,9 @@ const About = () => {
               <motion.div variants={itemVariants} className="about-image-container">
                 <div className="about-image-wrapper">
                   <div className="about-image-placeholder">
-                    <img 
-                      src={professionalPhoto} 
-                      alt="Professional Photo" 
+                    <img
+                      src={professionalPhoto2}
+                      alt="Professional Photo"
                       className="professional-photo"
                     />
                   </div>
@@ -97,7 +95,7 @@ const About = () => {
         </motion.div>
       </Container>
 
-      
+
     </section>
   );
 };
