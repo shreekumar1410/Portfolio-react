@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
+import { Container, Row, Col /* Tab, Tabs */ } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import {
-  BsMortarboard,
-  BsBriefcase,
+  // BsMortarboard,
+  // BsBriefcase,
   BsCalendar3,
   BsGeoAlt,
   BsAward,
   BsCode,
   BsLightbulb,
   BsStarFill,
-  BsTrophyFill,
+  // BsTrophyFill,
   BsRocketTakeoffFill
 } from 'react-icons/bs';
 import { FaGraduationCap, FaBriefcase } from 'react-icons/fa';

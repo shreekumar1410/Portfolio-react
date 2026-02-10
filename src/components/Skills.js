@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import {
-  SiC, SiFlask, SiMysql, SiSpringboot, SiOracle
+  // SiC, SiFlask, SiMysql, SiSpringboot, SiOracle
 } from 'react-icons/si';
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython, FaJava, FaAngular } from 'react-icons/fa';
+// import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython, FaJava, FaAngular } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../assets/styles/Skills.css'
 
-import { technicalSkills, technologies, techCategories, softSkills } from '../data/skillsData';
+import { /* technicalSkills, */ technologies, techCategories, softSkills } from '../data/skillsData';
 
 const Skills = () => {
   const [techFilter, setTechFilter] = useState('all');

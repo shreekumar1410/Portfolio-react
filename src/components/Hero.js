@@ -9,7 +9,7 @@ import CV from '../data/SHREE KUMAR MB.pdf';
 const Hero = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentRole, setCurrentRole] = useState(0);
-  
+
   const roles = [
     'Frontend Developer',
     'Software Engineer',
@@ -21,7 +21,7 @@ const Hero = () => {
     const typeText = () => {
       const currentRoleText = roles[currentRole];
       let i = 0;
-      
+
       const typeChar = () => {
         if (i < currentRoleText.length) {
           setDisplayText(currentRoleText.slice(0, i + 1));
@@ -44,13 +44,14 @@ const Hero = () => {
           }, 2000);
         }
       };
-      
+
       typeChar();
     };
 
     typeText();
-    
+
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentRole]);
 
   const handleScrollToProjects = () => {
@@ -81,7 +82,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="hero-content"
             >
-              <motion.h1 
+              <motion.h1
                 className="hero-title"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -89,7 +90,7 @@ const Hero = () => {
               >
                 Hi, I'm <span className="text-gradient">SHREE KUMAR</span>
               </motion.h1>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -99,7 +100,7 @@ const Hero = () => {
                 I'm a <span className="text-gradient">{displayText}</span>
                 <span className="typing-cursor">|</span>
               </motion.div>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -113,10 +114,10 @@ const Hero = () => {
                   lineHeight: '1.6'
                 }}
               >
-                Passionate about creating beautiful, functional, and user-friendly web applications 
+                Passionate about creating beautiful, functional, and user-friendly web applications
                 with modern technologies and best practices.
               </motion.p>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -130,7 +131,7 @@ const Hero = () => {
                   View My Work
                   <BsArrowDown />
                 </button>
-                
+
                 <button
                   className="btn-outline-custom d-flex align-items-center gap-2"
                   onClick={handleDownloadCV}
@@ -143,7 +144,7 @@ const Hero = () => {
           </Col>
         </Row>
       </Container>
-      
+
       {/* Floating animation elements */}
       <div className="hero-decorations">
         <motion.div
@@ -196,7 +197,7 @@ const Hero = () => {
         />
       </div>
 
-      
+
     </section>
   );
 };

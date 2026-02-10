@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import { motion } from 'framer-motion';
 import '../assets/styles/About.css'
-import professionalPhoto from '../assets/image/My_New_Photo.png';
+// import professionalPhoto from '../assets/image/My_New_Photo.png';
 import professionalPhoto2 from '../assets/image/About_page.png';
 
 const About = () => {
@@ -82,7 +82,7 @@ const About = () => {
                   <div className="about-image-placeholder">
                     <img
                       src={professionalPhoto2}
-                      alt="Professional Photo"
+                      alt="Shree Kumar"
                       className="professional-photo"
                     />
                   </div>
