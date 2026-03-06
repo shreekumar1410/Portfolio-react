@@ -40,6 +40,12 @@
       position: relative;
       width: 400px;
       height: 450px;
+      animation: aboutFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes aboutFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
     }
 
     .about-image-placeholder {
@@ -52,9 +58,15 @@
       justify-content: center;
       flex-direction: column;
       border: 2px solid var(--border-color);
-      box-shadow: 0 10px 30px var(--shadow-light);
+      box-shadow: 0 10px 30px var(--shadow-light), 0 0 0 0 var(--glow-primary);
       position: relative;
       z-index: 2;
+      transition: box-shadow 0.4s ease, border-color 0.3s ease;
+    }
+
+    .about-image-wrapper:hover .about-image-placeholder {
+      box-shadow: 0 15px 40px var(--shadow-medium), 0 0 30px var(--glow-primary);
+      border-color: var(--primary-color);
     }
 
     .placeholder-content {

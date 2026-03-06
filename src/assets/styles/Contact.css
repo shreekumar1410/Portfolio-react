@@ -106,7 +106,8 @@
       color: white;
       border-color: var(--social-color);
       text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 0 20px var(--highlight);
+      transform: scale(1.1) translateY(-2px);
     }
 
     .contact-form {
@@ -142,7 +143,7 @@
     .form-control-custom:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15), 0 0 25px var(--glow-primary);
       background: var(--bg-card);
     }
 

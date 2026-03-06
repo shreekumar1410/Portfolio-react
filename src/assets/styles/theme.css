@@ -51,6 +51,10 @@
   --decoration-secondary: rgba(20, 184, 166, 0.35);    /* Teal - Increased visibility */
   --decoration-secondary-alt: rgba(6, 182, 212, 0.28); /* Cyan - Increased visibility */
   --decoration-glow: rgba(139, 92, 246, 0.25);
+  
+  /* Animation accent colors */
+  --glow-primary: rgba(102, 126, 234, 0.4);
+  --highlight: rgba(118, 75, 162, 0.15);
 }
 
 /* Professional Color Palette - Dark Theme */
@@ -106,6 +110,10 @@
   --decoration-secondary: rgba(45, 212, 191, 0.25);    /* Brighter Teal */
   --decoration-secondary-alt: rgba(34, 211, 238, 0.2); /* Brighter Cyan */
   --decoration-glow: rgba(147, 102, 251, 0.15);
+  
+  /* Animation accent colors */
+  --glow-primary: rgba(147, 102, 251, 0.35);
+  --highlight: rgba(147, 102, 251, 0.12);
 }
 
 /* Smooth transitions for theme switching */
@@ -224,4 +232,58 @@
 .hover-lift:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px var(--shadow-medium);
+}
+
+/* ----- Additional keyframes for animations ----- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px var(--glow-primary); opacity: 1; }
+  50% { box-shadow: 0 0 35px var(--glow-primary); opacity: 0.9; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes underlineSlide {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes softPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* Utility animation classes */
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-underline {
+  animation: underlineSlide 0.4s ease-out forwards;
+}
+
+.animate-soft-pulse {
+  animation: softPulse 2s ease-in-out infinite;
 } 

@@ -35,7 +35,7 @@ const ScrollToTop = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="scroll-to-top-btn"
+          className="scroll-to-top-btn visible"
           aria-label="Scroll to top"
           title="Go to top"
         >

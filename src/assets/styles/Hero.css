@@ -77,6 +77,17 @@
       opacity: 0.9;
     }
 
+    /* Subtle gradient animation on hero background */
+    .hero {
+      background-size: 200% 200%;
+      animation: heroGradient 12s ease infinite;
+    }
+
+    @keyframes heroGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
     .hero-title {
       color: #87F;
     }

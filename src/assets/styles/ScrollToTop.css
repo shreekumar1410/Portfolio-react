@@ -43,9 +43,19 @@
 }
 
 .scroll-to-top-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px var(--shadow-heavy);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px var(--shadow-heavy), 0 0 30px var(--glow-primary);
   background: var(--primary-hover);
+  animation: none;
+}
+
+.scroll-to-top-btn.visible {
+  animation: scrollBtnPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes scrollBtnPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--shadow-medium); }
+  50% { box-shadow: 0 4px 25px var(--shadow-medium), 0 0 20px var(--glow-primary); }
 }
 
 .scroll-to-top-btn:active {
